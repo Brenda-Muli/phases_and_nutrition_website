@@ -15,6 +15,17 @@ from dotenv import load_dotenv
 from datetime import timedelta
 import os 
 import dj_database_url
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+cloudinary.config(
+  cloud_name = os.getenv('CLOUDINARY_CLOUD_NAME'),
+  api_key = os.getenv('CLOUDINARY_API_KEY'),
+  api_secret = os.getenv('CLOUDINARY_API_SECRET'),
+  secure = True
+)
+
 
 load_dotenv()
 
@@ -52,7 +63,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'rest_framework.authtoken',
     'blogs',
-    'django_summernote'
+    'django_summernote',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 
@@ -74,7 +87,7 @@ ROOT_URLCONF = 'wellnessproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join[BASE_DIR], 'build'],
+        'DIRS': [os.path.join(BASE_DIR), 'build'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -153,6 +166,9 @@ REST_FRAMEWORK = {
   'DEFAULT_PERMISSION_CLASSES':(
     'rest_framework.permissions.IsAuthenticated',
   ),
+  'DEFAULT_PERMISSION_CLASSES':[
+    'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+  ],
 }
 
 SIMPLE_JWT = {
@@ -190,15 +206,18 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  
 ]
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-  os.path.join(BASE_DIR, 'build/static')
-]
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = [
+#   os.path.join(BASE_DIR, '/build/static')
+# ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_URL = '/build/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# X_FRAME_OPTIONS = 'SAMEORIGIN'
+
 
 
 

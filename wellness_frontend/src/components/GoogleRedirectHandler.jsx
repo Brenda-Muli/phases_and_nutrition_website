@@ -21,7 +21,7 @@ function RedirectGoogleAuth () {
       axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
       axios.get ('http://localhost:8000/api/auth/user/').then(response => {
         console.log('User data:', response.data );
-        navigate('/');
+        navigate('/home');
       })
       .catch (error =>{
         console.error('Error verrifying token:', error.response ? error.response.data : error.message);

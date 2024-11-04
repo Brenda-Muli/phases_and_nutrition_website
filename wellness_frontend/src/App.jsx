@@ -6,6 +6,11 @@ import AuthPage from "./pages/AuthPage"
 import { useAuthentication } from "./auth"
 import NotFound from "./pages/NotFound"
 import RedirectGoogleAuth from "./components/GoogleRedirectHandler"
+import BlogPostList from "./components/BlogPostList"
+import BlogPostDetail from "./components/BlogPostDetail"
+import BlogFeatured from "./components/BlogFeatured"
+import BlogPostCategory from "./components/BlogPostCategory"
+import Header from "./components/Header"
 import './index.css'
 
 
@@ -27,7 +32,12 @@ function App() {
       <Route path="/login/callback" element = {<RedirectGoogleAuth />} />
       <Route path="/login/" element = {<ProtectedLogin />} />
       <Route path="/register" element = {<ProtectedRegister />} />
-      <Route path="/" element={<Home />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/" element = {<Header />} />
+      <Route path="/blog" element={<BlogPostList />} />
+      <Route path="/blog/:slug" element={<BlogPostDetail />} />
+      <Route path="/featured" element={<BlogFeatured />} />
+      <Route path="/blog/category" element={<BlogPostCategory />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
     </BrowserRouter>
