@@ -12,6 +12,7 @@ import BlogFeatured from "./components/BlogFeatured"
 import BlogPostCategory from "./components/BlogPostCategory"
 import Header from "./components/Header"
 import './index.css'
+import MenstrualPhase from "./components/MenstrualPhase"
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
       <Route path="/register" element = {<ProtectedRegister />} />
       <Route path="/home" element={<Home />} />
       <Route path="/" element = {<Header />} />
+      <Route path="/phases/:slug" element ={<MenstrualPhase />} />
       <Route path="/blog" element={<BlogPostList />} />
       <Route path="/blog/:slug" element={<BlogPostDetail />} />
       <Route path="/featured" element={<BlogFeatured />} />
