@@ -3,7 +3,7 @@ from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
-from .models import Phase, FoodCategory, Ingredient
+from .models import Phase, FoodCategory, Ingredient, PhaseFoodCategoryIngredient
 from .serializers import PhaseSerializer, FoodCategorySerializer, IngredientSerializer
 import os 
 
@@ -86,7 +86,7 @@ class FoodCategoryDetail(generics.RetrieveAPIView):
     def get(self, request, *args, **kwargs):
         cloud_name = os.getenv('CLOUDINARY_CLOUD_NAME')
         if not cloud_name:
-            return Response({"error": "Cloudinary cloud name is not set. "},status=status.HTTP_500_INTERNAL_SERVER_ERROR )
+            return Response({"error": "Cloudinary cloud name is not set. "},status=status.HTTP_500_INTERNAL_SERVER_ERROR )                      
         
         food_category = self.get_object()
         serializer = FoodCategorySerializer(food_category)
@@ -111,25 +111,45 @@ class PhaseList(generics.ListAPIView):
         if not cloud_name:
             return Response({"error": "Cloudinary cloud name is not set."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        
         phase_data = response.data
 
         
         for phase in phase_data:
-            if 'food_categories' in phase:
-                for category in phase['food_categories']:
-                    if 'image' in category and category['image']:
-                        category['image'] = f"https://res.cloudinary.com/{cloud_name}/{category['image']}"
+            phase_id = phase['id'] 
+            for category in phase['food_categories']:
+                category['ingredients'] = self.get_ingredients_for_phase(phase_id, category)
 
-            
-                    if 'ingredients' in category:
-                        for ingredient in category['ingredients']:
-                            if 'image' in ingredient and ingredient['image']:
-                                ingredient['image'] = f"https://res.cloudinary.com/{cloud_name}/{ingredient['image']}"
+                if 'image' in category and category['image']:
+                    category['image'] = f"https://res.cloudinary.com/{cloud_name}/{category['image']}"
 
-       
+                if 'ingredients' in category:
+                    for ingredient in category['ingredients']:
+                        if 'image' in ingredient and ingredient['image']:
+                            ingredient['image'] = f"https://res.cloudinary.com/{cloud_name}/{ingredient['image']}"
+
         return Response(phase_data, status=status.HTTP_200_OK)
 
+   
+    def get_ingredients_for_phase(self, phase_id, category):
+        phase_food_category_ingredients = PhaseFoodCategoryIngredient.objects.filter(
+            phase_id=phase_id,  
+            food_category_id=category['id']  
+        )
+
+        cloud_name = os.getenv('CLOUDINARY_CLOUD_NAME')
+        if not cloud_name:
+            return Response({"error": "Cloudinary cloud name is not set."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        ingredients = []
+        for pfc_ingredient in phase_food_category_ingredients:
+            ingredient_data = {
+                'ingredient': IngredientSerializer(pfc_ingredient.ingredient).data,
+            }
+            if 'image' in ingredient_data['ingredient'] and ingredient_data['ingredient']['image']:
+                ingredient_data['ingredient']['image'] = f"https://res.cloudinary.com/{cloud_name}/{ingredient_data['ingredient']['image']}"
+            ingredients.append(ingredient_data)
+
+        return ingredients
 
 class PhaseDetail(generics.RetrieveAPIView):
     queryset = Phase.objects.all()
@@ -137,10 +157,9 @@ class PhaseDetail(generics.RetrieveAPIView):
 
     def get(self, request, *args, **kwargs):
         slug = kwargs.get('slug')
-        print(f"Received slug: {slug}")
 
-        
-        phase = Phase.objects.filter(slug=slug).first()  
+      
+        phase = Phase.objects.filter(slug=slug).first() 
         if not phase:
             return Response({"error": "Phase not found."}, status=status.HTTP_404_NOT_FOUND)
 
@@ -149,23 +168,46 @@ class PhaseDetail(generics.RetrieveAPIView):
         if not cloud_name:
             return Response({"error": "Cloudinary cloud name is not set."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        serializer =PhaseSerializer(phase)
-        phase_data = serializer.data  
-
         
+        serializer = PhaseSerializer(phase, context={'phase_id': phase.id})  
+        phase_data = serializer.data  
+       
         if 'food_categories' in phase_data:
             for category in phase_data['food_categories']:
+                category['ingredients'] = self.get_ingredients_for_phase(phase.id, category)
+
                 if 'image' in category and category['image']:
                     category['image'] = f"https://res.cloudinary.com/{cloud_name}/{category['image']}"
 
-               
+                
                 if 'ingredients' in category:
                     for ingredient in category['ingredients']:
                         if 'image' in ingredient and ingredient['image']:
                             ingredient['image'] = f"https://res.cloudinary.com/{cloud_name}/{ingredient['image']}"
 
-      
         return Response(phase_data, status=status.HTTP_200_OK)
+
+    def get_ingredients_for_phase(self, phase_id, category):
+        phase_food_category_ingredients = PhaseFoodCategoryIngredient.objects.filter(
+            phase_id=phase_id, 
+            food_category_id=category['id']  
+        )
+
+        cloud_name = os.getenv('CLOUDINARY_CLOUD_NAME')
+        if not cloud_name:
+            return Response({"error": "Cloudinary cloud name is not set."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        ingredients = []
+        for pfc_ingredient in phase_food_category_ingredients:
+            ingredient_data = {
+                'ingredient': IngredientSerializer(pfc_ingredient.ingredient).data,
+            }
+            if 'image' in ingredient_data['ingredient'] and ingredient_data['ingredient']['image']:
+                ingredient_data['ingredient']['image'] = f"https://res.cloudinary.com/{cloud_name}/{ingredient_data['ingredient']['image']}"
+            ingredients.append(ingredient_data)
+
+        return ingredients
+
 
 
     

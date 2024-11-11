@@ -59,10 +59,10 @@ function BlogPostList() {
           className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
           style={{ opacity: 0.8 }} 
         />
-        <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-end">
-          <div className="w-1/4 p-4 text-white">
-            <h1 className="text-5xl font-bold font-prata text-white">Wellness Blog</h1>
-            <p className="mt-2 text-lg">Discover the latest insights and trends in our posts.</p>
+        <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center">
+          <div className="w-full p-4 text-white text-center">
+            <h1 className="text-7xl font-bold font-prata text-white">Wellness Blog</h1>
+            <p className="mt-2 text-lg text-white ">Discover the latest insights and trends in our posts.</p>
           </div>
         </div>
       </div>

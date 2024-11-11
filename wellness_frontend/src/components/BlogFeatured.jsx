@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion'; 
 
 function BlogFeatured() {
   const [featuredPost, setFeaturedPost] = useState(null);
@@ -24,8 +25,15 @@ function BlogFeatured() {
 
   return (
     <div className="max-w-3xl mx-0 p-4 pt-7">
-      <h2 className="text-2xl font-bold mb-4">Featured Article</h2>
-      <div className="border rounded-lg p-4">
+      <h2 className="text-2xl font-semibold text-[#951c45] mb-8 font-playfair">Featured Article</h2>
+      
+      {/* Motion Card */}
+      <motion.div 
+        className="border rounded-lg p-4" 
+        initial={{ opacity: 0, y: 30 }} 
+        animate={{ opacity: 1, y: 0 }} 
+        transition={{ duration: 0.8, ease: 'easeOut' }} 
+      >
         <img 
           src={featuredPost.thumbnail || '/photos/about_three.png'} 
           alt={featuredPost.title} 
@@ -36,7 +44,7 @@ function BlogFeatured() {
         <Link to={`/blog/${featuredPost.slug}`} className="text-pink-500 hover:text-pink-600">
           Read More
         </Link>
-      </div>
+      </motion.div>
 
       <div className="mt-4 text-center">
         <Link to="/blog" className="text-red-500 hover:text-red-600 font-semibold">

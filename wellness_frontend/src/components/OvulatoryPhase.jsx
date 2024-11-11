@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 
-function MenstrualPhase() {
+function OvulatoryPhase() {
   const { slug } = useParams();
   const [phase, setPhase] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -82,19 +82,19 @@ function MenstrualPhase() {
   >
     <div className="absolute inset-0 bg-white bg-opacity-70 z-0 "></div>
     <h2 className="text-4xl font-bold pt-9 text-[#8d0e32] font-playfair text-center  relative z-10">
-      Menstrual Phase
+      Ovulatory Phase
     </h2>
     <br />
 
   
     <motion.p
-      className="mt-4 text-lg max-w-6xl text-[#470a1f] text-justify relative pl-16 z-10 font-semibold"
+      className="mt-4 text-lg max-w-6xl text-[#470a1f] text-center relative pl-16 z-10 font-semibold"
       initial={{ opacity: 0, x: -50 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 1, delay: 0.5 }
     }  
     >
-      Menstrual Phase is the beginning of the menstrual cycle, lasting typically between 3 to 7 days. During this phase, the uterine lining sheds, which can lead to symptoms like fatigues, cramps and moode shifts. This phase is a time when the body requires gentle support through rest and targeted nutrition to span replenish lost nutrients and manage discomfort.
+      The ovulatory phase occurs around the middle of your cycle, typically between days 14 and 16. This is when an egg is released from the ovary, making it the most fertile period of the menstrual cycle. During this phase, estrogen peaks, often resulting in increased energy, enhanced mood, and a boost in confidence.
     </motion.p>
   </motion.div>
   <br/> <br/>
@@ -119,13 +119,13 @@ function MenstrualPhase() {
     </motion.h2>
     
     <motion.p
-      className="text-justify text-md mb-8 text-[#470a1f] max-w-6xl pl-8"
+      className="text-center text-md mb-8 text-[#470a1f] max-w-7xl pl-8"
       initial={{ y: -100 }}
       whileInView={{ y: 0 }}
       transition={{ duration: 1 }}
       viewport={{ once: false, amount: 0.5 }}
     >
-      To replenish nutrients and support your body during your period, aim to include iron-rich foods like leafy greens, beans, and lean meats. Magnesium-rich foods, such as dark chocolate, seeds, and nuts, can also help with muscle relaxation and reduce menstrual discomfort. You can click on any of these foods to learn more about them and add them to your personalized notes for easy reference later. Simply click on an ingredient to save it, and you'll have a handy list of foods to include in your diet.
+      The ovulatory phase is when estrogen peaks and your body is at its most fertile. During this time, you may feel more energetic and social, so it’s important to fuel your body with the right nutrients to keep up with your increased activity. Focus on eating protein-rich foods like chicken, turkey, tofu, and fish to support muscle function and maintain energy levels. You can click on any of these foods to learn more about them and add them to your personalized notes for easy reference later. Simply click on an ingredient to save it, and you'll have a handy list of foods to include in your diet.
     </motion.p>
 
     <div className="food-categories flex flex-wrap justify-start space-x-6">
@@ -239,16 +239,16 @@ function MenstrualPhase() {
       </motion.div>
 
       {/* Content Container */}
-  <div className="flex items-center justify-between mt-8">
-    <motion.div
-      className="image-section flex justify-center items-center"
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1, delay: 1 }}
-      
-    >
-    </motion.div>
-  </div>
+    <div className="flex items-center justify-between mt-8">
+      <motion.div
+        className="image-section flex justify-center items-center"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 1 }}
+        
+      >
+      </motion.div>
+    </div>
 
 
     <motion.div
@@ -265,7 +265,7 @@ function MenstrualPhase() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
         >
-          {/* Image Section (left) */}
+          
           <motion.div
             className="flex justify-center items-center"
             initial={{ opacity: 0, x: -50 }}
@@ -273,13 +273,13 @@ function MenstrualPhase() {
             transition={{ duration: 1 }}
           >
             <img
-              src="/photos/skin-care.png"
+              src="/photos/productivity_ovu.jpg"
               alt="Menstrual Phase Image"
-              className="w-1/2 h-auto object-cover-top"
+              className="w-1/2 h-1/2 object-cover-top"
             />
           </motion.div>
 
-          {/* Text Section (right) */}
+          
           <motion.div
             className="flex flex-col justify-center"
             initial={{ opacity: 0, x: 50 }}
@@ -288,15 +288,15 @@ function MenstrualPhase() {
             
           >
             <h2 className="text-5xl font-bold pt-9 text-[#8d0e32] font-playfair">
-              Skin Care
+              Productivity
             </h2>
             <p className="mt-4 text-md max-w-xl text-[#470a1f]">
-            During menstruation, there is a drop in estrogen that can lead to a decrease in the skin’s natural moisture retention, leaving it feeling rough, tight, or flaky. To combat these changes, incorporating a hydrating serum, hydrating face masks or rich moisturizers into your skincare routine can be especially helpful. Serums with ingredients like hyaluronic acid, glycerin, or ceramides can provide deep hydration and support the skin’s natural barrier.
+            With estrogen at its peak during ovulation, you may feel more confident, sociable, and ready to tackle high-energy tasks. This is the perfect time for big meetings, collaborations, and networking events, as your communication skills and ability to multitask are often heightened. You may also feel a surge in creativity, making it a great phase for presenting ideas and taking the lead on group projects.
             </p>
           </motion.div>
         </motion.div>
 
-      {/* Second row (reversed order) */}
+      {/* Second row */}
       <motion.div
         className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12"
         initial={{ opacity: 0, x: 100 }}
@@ -313,7 +313,7 @@ function MenstrualPhase() {
             Workouts<br /> 
           </h2>
           <p className="mt-4 text-md max-w-xl text-[#470a1f]">
-          During menstruation, the body undergoes various hormonal and physical changes that may cause fatigue, cramps, or discomfort. While intense workouts may feel more challenging, light exercise like yoga, stretching, or low-impact activities can actually be beneficial. If you're feeling tired or uncomfortable, prioritizing rest and hydration is just as valuable for overall well-being during this time.
+          Your energy levels are at their highest during ovulation, so it’s the ideal time to push yourself with high-intensity workouts. Engage in activities like cycling, running, or weightlifting to challenge your body and maximize your fitness potential. These intense workouts align with your body’s peak strength and stamina, and will help you make the most of the high energy during this phase.
           </p>
         </motion.div>
 
@@ -324,15 +324,15 @@ function MenstrualPhase() {
           transition={{ duration: 1 }}
         >
           <img
-            src="/photos/stretch.jpg"
+            src="/photos/workout_ovu.jpg"
             alt="Menstrual Phase Image"
-            className="w-3/4 h-auto object-cover"
+            className="w-1/2 h-1/2 object-cover"
           />
     </motion.div>
     </motion.div>
 
-    {/* Third row */}
-    <motion.div
+      {/* Third row */}
+      <motion.div
         className="grid grid-cols-1 md:grid-cols-2 gap-8"
         initial={{ opacity: 0, x: -100 }}
         animate={{ opacity: 1, x: 0 }}
@@ -345,9 +345,9 @@ function MenstrualPhase() {
           transition={{ duration: 1 }}
         >
           <img
-            src="/photos/two_section.jpg"
+            src="/photos/skin_ovu.jpg"
             alt="Menstrual Phase Image"
-            className="w-3/4 h-auto object-cover-top"
+            className="w-1/2 h-1/2 object-cover-top"
           />
         </motion.div>
 
@@ -359,10 +359,10 @@ function MenstrualPhase() {
           
         >
           <h2 className="text-5xl font-bold pt-9 text-[#8d0e32] font-playfair">
-            Menstrual <br /> Products
+            Skin Care
           </h2>
           <p className="mt-4 text-md max-w-xl text-[#470a1f]">
-          Choosing the right menstrual products can make a significant difference in comfort and convenience during your period. There are a variety of options available, each with its own benefits depending on personal preference and lifestyle.  When selecting products, it's important to consider factors like absorbency, comfort, and skin sensitivity, as well as whether the product aligns with your environmental values. Finding the right fit can make your period feel more manageable and less stressful.
+          During the ovulatory phase, your body benefits from additional sunlight exposure, so boosting your vitamin D levels is important for both physical and mental well-being. Vitamin D can help support your immune system and improve mood. Exfoliating can continue to be beneficial during this phase to keep your skin clear and refreshed. Be sure to incorporate a good sunscreen as well, as your skin might be more sensitive to sun exposure.
           </p>
         </motion.div>
       </motion.div>
@@ -371,4 +371,4 @@ function MenstrualPhase() {
   );
 };
 
-export default MenstrualPhase;
+export default OvulatoryPhase;

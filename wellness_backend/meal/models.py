@@ -6,7 +6,6 @@ from django.utils.text import slugify
 class Ingredient(models.Model):
     name = models.CharField(max_length=100)
     image = CloudinaryField('image') 
-    description = models.TextField(blank=True)
     slug = models.SlugField(unique=True, blank = True)
 
     def __str__(self):
@@ -15,7 +14,7 @@ class Ingredient(models.Model):
 class FoodCategory(models.Model):
     name = models.CharField(max_length=100)
     image = CloudinaryField('image')  
-    ingredients = models.ManyToManyField(Ingredient, related_name='categories')
+    
 
     def __str__(self):
         return self.name
@@ -33,3 +32,14 @@ class Phase(models.Model):
 
     def __str__(self):
         return self.name
+
+class PhaseFoodCategoryIngredient(models.Model):
+    phase = models.ForeignKey(Phase, on_delete=models.CASCADE)
+    food_category = models.ForeignKey(FoodCategory, on_delete=models.CASCADE)
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('phase', 'food_category', 'ingredient')
+
+    def __str__(self):
+        return f'{self.phase.name} - {self.food_category.name } - {self.ingredient.name}' 

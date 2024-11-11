@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 
-function MenstrualPhase() {
+function FollicularPhase() {
   const { slug } = useParams();
   const [phase, setPhase] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -82,19 +82,19 @@ function MenstrualPhase() {
   >
     <div className="absolute inset-0 bg-white bg-opacity-70 z-0 "></div>
     <h2 className="text-4xl font-bold pt-9 text-[#8d0e32] font-playfair text-center  relative z-10">
-      Menstrual Phase
+      Follicular Phase
     </h2>
     <br />
 
   
     <motion.p
-      className="mt-4 text-lg max-w-6xl text-[#470a1f] text-justify relative pl-16 z-10 font-semibold"
+      className="mt-4 text-lg max-w-6xl text-[#470a1f] text-center relative pl-16 z-10 font-semibold"
       initial={{ opacity: 0, x: -50 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 1, delay: 0.5 }
     }  
     >
-      Menstrual Phase is the beginning of the menstrual cycle, lasting typically between 3 to 7 days. During this phase, the uterine lining sheds, which can lead to symptoms like fatigues, cramps and moode shifts. This phase is a time when the body requires gentle support through rest and targeted nutrition to span replenish lost nutrients and manage discomfort.
+     The follicular phase marks the start of your cycle after menstruation, typically lasting from day 1 to around day 14. Energy levels tend to rise, and you may feel more motivated and focused. This phase is an ideal time to engage in more active workouts and nourish your body with foods that support hormone production, boost energy, and promote cellular repair.
     </motion.p>
   </motion.div>
   <br/> <br/>
@@ -119,13 +119,14 @@ function MenstrualPhase() {
     </motion.h2>
     
     <motion.p
-      className="text-justify text-md mb-8 text-[#470a1f] max-w-6xl pl-8"
+      className="text-center text-md mb-8 text-[#470a1f] max-w-7xl pl-8"
       initial={{ y: -100 }}
       whileInView={{ y: 0 }}
       transition={{ duration: 1 }}
       viewport={{ once: false, amount: 0.5 }}
     >
-      To replenish nutrients and support your body during your period, aim to include iron-rich foods like leafy greens, beans, and lean meats. Magnesium-rich foods, such as dark chocolate, seeds, and nuts, can also help with muscle relaxation and reduce menstrual discomfort. You can click on any of these foods to learn more about them and add them to your personalized notes for easy reference later. Simply click on an ingredient to save it, and you'll have a handy list of foods to include in your diet.
+      This is a time when energy levels typically rise, so focus on replenishing nutrients to support your body’s increased activity and metabolic needs. Include protein-rich foods like eggs, lean meats, and legumes to help build muscle and support cell repair. It's also an excellent time to include antioxidant-rich fruits and vegetables, such as berries, leafy greens, and cruciferous vegetables, to combat oxidative stress and promote hormonal balance. You can click on any of these foods to learn more about them and add them to your personalized notes for easy reference later. Simply click on an ingredient to save it, and you'll have a handy list of foods to include in your diet.
+
     </motion.p>
 
     <div className="food-categories flex flex-wrap justify-start space-x-6">
@@ -265,7 +266,7 @@ function MenstrualPhase() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
         >
-          {/* Image Section (left) */}
+
           <motion.div
             className="flex justify-center items-center"
             initial={{ opacity: 0, x: -50 }}
@@ -273,13 +274,12 @@ function MenstrualPhase() {
             transition={{ duration: 1 }}
           >
             <img
-              src="/photos/skin-care.png"
+              src="/photos/productivity_foll.jpg"
               alt="Menstrual Phase Image"
               className="w-1/2 h-auto object-cover-top"
             />
           </motion.div>
 
-          {/* Text Section (right) */}
           <motion.div
             className="flex flex-col justify-center"
             initial={{ opacity: 0, x: 50 }}
@@ -288,15 +288,15 @@ function MenstrualPhase() {
             
           >
             <h2 className="text-5xl font-bold pt-9 text-[#8d0e32] font-playfair">
-              Skin Care
+              Productivity
             </h2>
             <p className="mt-4 text-md max-w-xl text-[#470a1f]">
-            During menstruation, there is a drop in estrogen that can lead to a decrease in the skin’s natural moisture retention, leaving it feeling rough, tight, or flaky. To combat these changes, incorporating a hydrating serum, hydrating face masks or rich moisturizers into your skincare routine can be especially helpful. Serums with ingredients like hyaluronic acid, glycerin, or ceramides can provide deep hydration and support the skin’s natural barrier.
+            During the follicular phase, estrogen levels begin to rise, leading to increased energy, mental clarity, and focus. This makes it an ideal time to start new projects, plan ahead, or dive into creative activities. Whether it's brainstorming ideas, strategizing, or learning something new, your ability to tackle tasks that require mental sharpness and enthusiasm is at its peak. Take advantage of this phase to set the tone for the rest of your cycle by being productive and proactive.
             </p>
           </motion.div>
         </motion.div>
 
-      {/* Second row (reversed order) */}
+      {/* Second row */}
       <motion.div
         className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12"
         initial={{ opacity: 0, x: 100 }}
@@ -313,7 +313,7 @@ function MenstrualPhase() {
             Workouts<br /> 
           </h2>
           <p className="mt-4 text-md max-w-xl text-[#470a1f]">
-          During menstruation, the body undergoes various hormonal and physical changes that may cause fatigue, cramps, or discomfort. While intense workouts may feel more challenging, light exercise like yoga, stretching, or low-impact activities can actually be beneficial. If you're feeling tired or uncomfortable, prioritizing rest and hydration is just as valuable for overall well-being during this time.
+          The follicular phase is when your body has the most energy, and it's an excellent time to engage in more intense physical activities. Weightlifting and strength training can help build muscle and increase endurance, while jogging or hiking outdoors allows you to tap into your natural vitality. The rising energy levels also make it easier to push through challenging workouts, so focus on activities that build strength, stamina, and overall fitness.
           </p>
         </motion.div>
 
@@ -324,15 +324,15 @@ function MenstrualPhase() {
           transition={{ duration: 1 }}
         >
           <img
-            src="/photos/stretch.jpg"
+            src="/photos/workout_foll.jpg"
             alt="Menstrual Phase Image"
-            className="w-3/4 h-auto object-cover"
+            className="w-1/2 h-1/2 object-cover"
           />
     </motion.div>
     </motion.div>
 
-    {/* Third row */}
-    <motion.div
+      {/* Third row */}
+      <motion.div
         className="grid grid-cols-1 md:grid-cols-2 gap-8"
         initial={{ opacity: 0, x: -100 }}
         animate={{ opacity: 1, x: 0 }}
@@ -345,13 +345,13 @@ function MenstrualPhase() {
           transition={{ duration: 1 }}
         >
           <img
-            src="/photos/two_section.jpg"
+            src="/photos/skin_foll.jpg"
             alt="Menstrual Phase Image"
             className="w-3/4 h-auto object-cover-top"
           />
-        </motion.div>
+      </motion.div>
 
-        <motion.div
+      <motion.div
           className="flex flex-col justify-center"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -359,16 +359,16 @@ function MenstrualPhase() {
           
         >
           <h2 className="text-5xl font-bold pt-9 text-[#8d0e32] font-playfair">
-            Menstrual <br /> Products
+            Skin Care
           </h2>
           <p className="mt-4 text-md max-w-xl text-[#470a1f]">
-          Choosing the right menstrual products can make a significant difference in comfort and convenience during your period. There are a variety of options available, each with its own benefits depending on personal preference and lifestyle.  When selecting products, it's important to consider factors like absorbency, comfort, and skin sensitivity, as well as whether the product aligns with your environmental values. Finding the right fit can make your period feel more manageable and less stressful.
+          As your energy picks up in this phase, it’s a great time to focus on your skin's natural renewal. Exfoliating your skin with gentle scrubs or chemical exfoliants can help shed dead skin cells, revealing smoother and more radiant skin. Adding antioxidant serums or vitamin C serums to your routine can protect your skin from environmental damage and promote cell regeneration, supporting your skin's health as it recovers from the previous phase.
           </p>
-        </motion.div>
+      </motion.div>
       </motion.div>
     </motion.div>
   </div>
   );
 };
 
-export default MenstrualPhase;
+export default FollicularPhase;

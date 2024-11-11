@@ -51,20 +51,20 @@ function Navbar() {
   return (
   <div
     className={`fixed w-full bg-transparent z-10 transition-transform duration-300 ${
-      isVisible ? "translate-y-0" : "-translate-y-full pb-8"
+      isVisible ? "translate-y-0" : "-translate-y-full pb-9"
     }`}
   >
     <nav
       ref={navbarRef} 
-      className="max-w-6xl mx-auto p-4 flex justify-between items-center font-calistoga"
+      className="max-w-6xl mx-auto p-4 flex justify-between items-center font-calistoga "
     >
-      <div className="flex items-center">
+      <div className="flex items-center ">
         {isAuthorized && (
           <>
             <li>
               <Link
-                to="/"
-                className="text-[#DE143C] hover:text-[#C71A31] font-bold mr-4"
+                to="/home"
+                className="text-[#b21e4b] hover:text-[#C71A31] font-bold mr-4"
               >
                 HOME
               </Link>
@@ -82,7 +82,7 @@ function Navbar() {
     <li className="relative">
       <Link
         to="#"
-        className="text-[#DE143C] hover:text-[#C71A31] font-bold"
+        className="text-[#b21e4b] hover:text-[#C71A31] font-bold"
         onClick={(e) => {
           e.preventDefault(); 
           setSubmenuVisible(!submenuVisible); 
@@ -116,7 +116,7 @@ function Navbar() {
       <li>
         <Link
           to="/blog"
-          className="text-[#DE143C] hover:text-[#C71A31] font-bold"
+          className="text-[#b21e4b] hover:text-[#C71A31] font-bold"
         >
           BLOGS
           </Link>
@@ -125,7 +125,7 @@ function Navbar() {
           <Link
             onClick={handleLogout}
             to="/logout"
-            className="text-[#DE143C] hover:text-[#C71A31] font-bold"
+            className="text-[#b21e4b] hover:text-[#C71A31] font-bold"
           >
             LOGOUT
           </Link>
@@ -136,7 +136,7 @@ function Navbar() {
         <li>
           <Link
             to="/register"
-            className="text-[#DE143C] hover:text-[#C71A31] font-bold"
+            className="text-[#b21e4b] hover:text-[#C71A31] font-bold"
           >
             SIGN UP
           </Link>
@@ -144,7 +144,7 @@ function Navbar() {
         <li>
           <Link
             to="/login"
-            className="text-[#DE143C] hover:text-[#C71A31] font-bold"
+            className="text-[#b21e4b] hover:text-[#C71A31] font-bold"
           >
             LOGIN
           </Link>

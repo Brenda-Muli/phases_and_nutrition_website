@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../token";
 import google from "../assets/google.png";
-import picture from "../assets/picture.png";
+import pic from "../assets/pic.png";
 import { motion } from "framer-motion";
 
 const AuthForm = ({ route, method }) => {
@@ -60,15 +60,31 @@ const AuthForm = ({ route, method }) => {
   };
 
   return (
-    <div className="relative flex h-screen ">
-      <div className="flex items-center justify-center w-full h-full bg-gradient-to-r from-[#fff0f2] to-[#ffe3e4] overflow-hidden ">
+    <div className="relative flex h-screen overflow-hidden">
+      {/* Circle background */}
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-r from-[#fbd0d9] to-[#fef2f4] rounded-full z-0"
+        initial={{ left: isLogin ? "50%" : "-40%", top: "-50%", width: "600px", height: "600px" }} 
+        animate={{
+          left: isLogin ? "60%" : "-20%",
+          top: "-40%",
+          width: "800px", 
+          height: "800px", 
+        }}
+        transition={{
+          duration: 1.5, 
+          ease: "easeInOut",
+        }}
+      />
+
+      <div className="flex items-center justify-center w-full h-full relative z-10">
         <motion.div
-          className="flex items-center justify-center w-1/2 rounded-lg shadow-md bg-white"
+          className="flex items-center justify-center w-3/4 lg:w-1/2 rounded-lg shadow-lg bg-[rgba(255,182,193,0.3)] overflow-hidden"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
-          {/* Authentication*/}
+          {/* Authentication Form */}
           <div className={`flex flex-col items-center justify-center w-1/2 p-6 ${isLogin ? "order-1" : "order-2"}`}>
             {loading && (
               <div>
@@ -77,7 +93,7 @@ const AuthForm = ({ route, method }) => {
             )}
             {!loading && (
               <form onSubmit={handleSubmit}>
-                <h2 className="text-[#c50b34] text-xl mb-4 font-bold">{isLogin ? "LOGIN" : "SIGN UP"}</h2>
+                <h2 className="text-[#b31d3f] text-xl mb-4 font-bold">{isLogin ? "LOGIN" : "SIGN UP"}</h2>
                 {error && <div className="text-red-600 mb-2">{error}</div>}
                 {success && <div className="text-green-600 mb-2">{success}</div>}
                 <div className="mb-4">
@@ -89,7 +105,7 @@ const AuthForm = ({ route, method }) => {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
-                    className="w-full p-2 border border-[#8d0e32]"
+                    className="w-full p-2 border border-[#8d0e32] rounded"
                   />
                 </div>
                 <div className="mb-4">
@@ -101,21 +117,21 @@ const AuthForm = ({ route, method }) => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="w-full p-2 border border-[#8d0e32]"
+                    className="w-full p-2 border border-[#8d0e32] rounded"
                   />
                 </div>
-                <button type="submit" className="bg-red-700 text-white p-2 rounded mb-4 w-full hover:bg-red-200 ">
+                <button type="submit" className="bg-[#d5294d] text-white p-2 rounded mb-4 w-full hover:bg-red-700">
                   {isLogin ? "Login" : "Register"}
                 </button>
                 <button
                   type="button"
-                  className="flex items-center justify-center bg-red-700 text-white p-2 rounded w-full hover:bg-red-200"
+                  className="flex items-center justify-center bg-[#d5294d] text-white p-2 rounded w-full hover:bg-red-700"
                   onClick={handleGoogleLogin}
                 >
                   <img src={google} alt='google icon' className="w-5 h-5 mr-2" />
                   {isLogin ? "Login with Google" : "Register with Google"}
                 </button>
-                <p className="text-center mt-4 ">
+                <p className="text-center mt-4">
                   {isLogin ? "Do not have an account?" : "Already have an account?"}
                   <span 
                     className="text-red-600 cursor-pointer" 
@@ -129,20 +145,18 @@ const AuthForm = ({ route, method }) => {
           </div>
   
           {/* Image Section */}
-          <div className={`flex items-center justify-center w-1/2 ${isLogin ? "order-2" : "order-1"}`}>
-            <motion.img
-              src={picture}
-              alt="Description"
-              width="400"
-              initial={{ x: isLogin ? 100 : -100 }}
-              animate={{ x: 0 }}
-              transition={{ duration: 0.5 }}
-            />
-          </div>
+          <motion.div
+            className={`flex items-center justify-center w-1/2 h-full ${isLogin ? "order-2" : "order-1"}`}
+            initial={{ x: isLogin ? 100 : -100 }}
+            animate={{ x: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <img src={pic} alt="Description" className="w-full" />
+          </motion.div>
         </motion.div>
       </div>
     </div>
   );
-}  
+};
 
 export default AuthForm;

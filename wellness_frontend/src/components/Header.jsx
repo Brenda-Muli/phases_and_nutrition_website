@@ -7,8 +7,8 @@ function Header() {
   const [textColor, setTextColor] = useState('#fb3855'); 
 
   const backgroundConfig = [
-    { image: '/photos/header_one.jpg', color: '#fb3855', buttonColor: '#DE143C' }, 
-    { image: '/photos/background_image.jpg', color: '#ff6b7e', buttonColor: '#ff6b7e' }, 
+    { image: '/photos/header_one.jpg', color: '#ee4582', buttonColor: '#ee4582' }, 
+    { image: '/photos/background_image.jpg', color: '#f996b5', buttonColor: '#d39a99' }, 
   ];
 
   // update background image and text/button color
@@ -42,7 +42,7 @@ function Header() {
         animate={{ opacity: [0, 1] }} 
         transition={{ duration: 4, ease: "easeInOut" }}
       />
-      <div className="absolute inset-0 bg-black opacity-40 z-10"></div> 
+      <div className="absolute inset-0 bg-black opacity-30 z-10"></div> 
 
       {/* Text Section */}
       <div className="relative flex flex-col items-center justify-center p-8 w-full text-right z-20">
