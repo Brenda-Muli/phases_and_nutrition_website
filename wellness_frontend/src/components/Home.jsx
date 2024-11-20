@@ -12,18 +12,20 @@ function Home() {
       {/* Intro Section with Motion */}
       <motion.section
         style={{
-          backgroundImage: "url('/photos/phases_image.JPG')",
+          backgroundImage: "url('/photos/banner.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
+       
+          
         className="relative flex items-start justify-start p-8 bg-white "
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
         
-        <div className="w-full max-w-2xl pt-9 ml-28">
-          <h2 className="text-5xl font-semibold text-center mb-4 text-[#801b40] font-playfair ">
+        <div className="w-full max-w-2xl pt-9 ">
+          <h2 className="text-5xl font-semibold text-left mb-4 text-[#801b40] font-playfair ">
             Wellness in <span className="text-[#b21e4b]">Phases</span>
           </h2>
           <p className="text-lg mt-2 text-left text-[#801b40] ">
@@ -34,7 +36,7 @@ function Home() {
 
       {/* Menstrual Cycle Section with Motion */}
       <motion.section
-        className="p-8"
+        className=""
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.5 }}
@@ -49,7 +51,6 @@ function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.5 }}
-         
           
         >
           {/* Card 1 */}

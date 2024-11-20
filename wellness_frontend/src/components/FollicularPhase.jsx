@@ -73,7 +73,7 @@ function FollicularPhase() {
     transition={{ duration: 1 }}
     className="relative bg-cover bg-center p-10"
     style={{
-      backgroundImage: "url('/photos/menstrual_banner.png')",
+      backgroundImage: "url('/photos/phases_image.JPG')",
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       padding: '40px 20px',

@@ -92,7 +92,7 @@ function Navbar() {
                         <Link
                           key={phase.slug}
                           to={`/phases/${phase.slug}`}
-                          className="block px-4 py-2 text-sm text-[#fb3855] hover:bg-[#ff6b7e]"
+                          className="block px-4 py-2 text-sm text-[#d42a5b] hover:bg-[#e63f66]"
                           onClick={() => setSubmenuVisible(false)}
                         >
                           {phase.name}
@@ -111,11 +111,16 @@ function Navbar() {
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/profile"
-                  className="text-[#b21e4b] hover:text-[#C71A31] font-bold"
-                >
-                  PROFILE
+                <Link to="/profile" className="flex items-center space-x-2">
+                  <img 
+                    src="/photos/defaultprofile.JPG" 
+                    alt="Profile"
+                    className="w-6 h-6 rounded-full" 
+                    
+                  />
+                <span className="text-[#b21e4b] hover:text-[#C71A31] font-bold">
+                    PROFILE
+                </span>
                 </Link>
               </li>
               <li>
