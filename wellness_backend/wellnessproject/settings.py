@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'phases',
     'rest_framework',
+    'rest_framework_simplejwt',
     'corsheaders',
     'allauth',
     'allauth.account',
@@ -66,7 +67,8 @@ INSTALLED_APPS = [
     'django_summernote',
     'cloudinary',
     'cloudinary_storage',
-    'meal'
+    'meal',
+    
     
 ]
 
@@ -80,7 +82,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'allauth.account.middleware.AccountMiddleware'
+    'allauth.account.middleware.AccountMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware'
     
 ]
 

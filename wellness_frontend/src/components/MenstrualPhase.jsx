@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 
 function MenstrualPhase() {
   const { slug } = useParams();
+  const navigate = useNavigate();
   const [phase, setPhase] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -12,6 +13,7 @@ function MenstrualPhase() {
   const [ingredientsPerPage, setIngredientsPerPage] = useState(3);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [visibleImages, setVisibleImages] = useState([false, false, false]);
+  const [selectedIngredients, setSelectedIngredients] = useState([]);
 
   useEffect(() => {
     const fetchPhaseDetails = async () => {
@@ -27,6 +29,7 @@ function MenstrualPhase() {
 
     fetchPhaseDetails();
   }, [slug]);
+
 
   // triggering the image visibility in the fourth section 
   useEffect(() => {
@@ -63,6 +66,16 @@ function MenstrualPhase() {
     if (currentPage > 0) setCurrentPage(currentPage - 1);
   };
 
+  const handleIngredientSelect = (ingredient) => {
+    setSelectedIngredients((prev) => {
+      if (prev.some((item) => item.id === ingredient.id)) {
+        return prev; 
+      }
+      return [...prev, ingredient];
+    });
+    alert(`${ingredient.name} added to profile!`);
+  };
+
   return (
     <div className = "ml-1">
   
@@ -73,14 +86,14 @@ function MenstrualPhase() {
     transition={{ duration: 1 }}
     className="relative bg-cover bg-center p-10"
     style={{
-      backgroundImage: "url('/photos/menstrual_banner.png')",
+      backgroundImage: "url('/photos/phases_image.JPG')",
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       padding: '40px 20px',
    
     }}
   >
-    <div className="absolute inset-0 bg-white bg-opacity-70 z-0 "></div>
+    <div className="absolute inset-0 bg-white bg-opacity-20 z-0 "></div>
     <h2 className="text-4xl font-bold pt-9 text-[#8d0e32] font-playfair text-center  relative z-10">
       Menstrual Phase
     </h2>
@@ -88,13 +101,13 @@ function MenstrualPhase() {
 
   
     <motion.p
-      className="mt-4 text-lg max-w-6xl text-[#470a1f] text-justify relative pl-16 z-10 font-semibold"
+      className="mt-4 text-lg max-w-7xl text-[#470a1f] text-center pl-8 relative z-10 font-semibold"
       initial={{ opacity: 0, x: -50 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 1, delay: 0.5 }
     }  
     >
-      Menstrual Phase is the beginning of the menstrual cycle, lasting typically between 3 to 7 days. During this phase, the uterine lining sheds, which can lead to symptoms like fatigues, cramps and moode shifts. This phase is a time when the body requires gentle support through rest and targeted nutrition to span replenish lost nutrients and manage discomfort.
+      Menstrual Phase is the beginning of the menstrual cycle, lasting typically between 3 to 7 days. During this phase, the uterine lining sheds, which can lead to symptoms like fatigues, cramps and mood shifts. This phase is a time when the body requires gentle support through rest and targeted nutrition to span replenish lost nutrients and manage discomfort.
     </motion.p>
   </motion.div>
   <br/> <br/>
@@ -109,7 +122,7 @@ function MenstrualPhase() {
     className="third-section py-8"
   >
     <motion.h2
-      className="text-center text-4xl font-bold mb-8 text-[#8d0e32] font-playfair"
+      className="text-left pl-8 text-4xl font-bold mb-8 text-[#8d0e32] font-playfair"
       initial={{ y: -100 }}
       whileInView={{ y: 0 }}
       transition={{ duration: 1 }}
@@ -119,7 +132,7 @@ function MenstrualPhase() {
     </motion.h2>
     
     <motion.p
-      className="text-justify text-md mb-8 text-[#470a1f] max-w-6xl pl-8"
+      className="text-justify text-md mb-8 text-[#470a1f] max-w-7xl pl-8"
       initial={{ y: -100 }}
       whileInView={{ y: 0 }}
       transition={{ duration: 1 }}
@@ -157,49 +170,43 @@ function MenstrualPhase() {
         </motion.div>
       ))}
     </div>
-
-{/* Show Ingredients and Pagination if Category is Selected */}
-    {selectedCategory && (
-      <div className="ingredient-slider">
-        <motion.div
-          className="ingredients flex overflow-x-auto space-x-4"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: false, amount: 0.5 }}
-        >
-          {currentIngredients.map((ingredientData) => {
-            const ingredient = ingredientData.ingredient; 
-            return (
-              <div key={ingredient.id} className="ingredient-item flex-shrink-0 w-64">
-                <h4 className="text-lg font-semibold">{ingredient.name}</h4>
-                <motion.img
-                  src={ingredient.image}
-                  alt={ingredient.name}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5 }}
-                  className="w-full h-48 object-cover rounded-lg mb-2"
-                />
-                <p>{ingredient.description}</p> 
-                <div className="radio-button flex items-center mt-2">
-                  <input
-                    type="radio"
-                    name="ingredientNote"
-                    id={`ingredient-${ingredient.id}`}
-                    className="mr-2"
-                    onChange={() => alert(`${ingredient.name} added to notes!`)}
-                  />
-                  <label htmlFor={`ingredient-${ingredient.id}`} className="text-white">
-                    Add to Notes
-                  </label>
-                </div>
-              </div>
-            );
-          })}
-
     </motion.div>
 
+{/* Show Ingredients and Pagination if Category is Selected */}
+{selectedCategory && (
+  <div className="ingredient-slider">
+    <motion.div
+      className="ingredients flex overflow-x-auto space-x-4"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      viewport={{ once: false, amount: 0.5 }}
+    >
+      {currentIngredients.map((ingredientData) => {
+        const ingredient = ingredientData.ingredient;
+        return (
+          <div
+            key={ingredient.id}
+            className="ingredient-item flex-shrink-0 w-64"
+            onClick={() => handleIngredientSelect(ingredient)}
+          >
+            <h4 className="text-lg font-semibold">{ingredient.name}</h4>
+            <motion.img
+              src={ingredient.image}
+              alt={ingredient.name}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="w-full h-48 object-cover rounded-lg mb-2"
+            />
+            <p>{ingredient.description}</p>
+          </div>
+        );
+      })}
+    </motion.div>
+  </div>
+)}
+ 
       <div className="ingredient-nav flex justify-between items-center my-4">
         <button
           onClick={prevPage}
@@ -219,24 +226,6 @@ function MenstrualPhase() {
           &lt;&gt;
         </button>
       </div>
-
-      <div className="radio-buttons flex justify-center space-x-2">
-        {Array.from({ length: totalPages }).map((_, index) => (
-          <label key={index} className="text-white">
-            <input
-              type="radio"
-              name="ingredientPage"
-              checked={currentPage === index}
-              onChange={() => setCurrentPage(index)}
-              className="mr-1"
-            />
-            {index + 1}
-          </label>
-        ))}
-      </div>
-    </div>
-      )}
-      </motion.div>
 
       {/* Content Container */}
   <div className="flex items-center justify-between mt-8">
@@ -298,7 +287,7 @@ function MenstrualPhase() {
 
       {/* Second row (reversed order) */}
       <motion.div
-        className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12"
+        className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12"
         initial={{ opacity: 0, x: 100 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, delay: 0.5 }}

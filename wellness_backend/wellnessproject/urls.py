@@ -34,7 +34,8 @@ urlpatterns = [
     path('api/google/validate_token/', validate_google_token, name='validate_token'),
     path('summernote/', include('django_summernote.urls')), 
     path('api/blog/', include('blogs.urls')),
-    path('api/meal/', include('meal.urls')) 
+    path('api/meal/', include('meal.urls')),
+    path('api/phases/', include('phases.urls'))
     
 ]  
 

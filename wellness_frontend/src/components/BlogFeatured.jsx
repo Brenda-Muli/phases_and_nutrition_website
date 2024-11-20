@@ -47,7 +47,7 @@ function BlogFeatured() {
       </motion.div>
 
       <div className="mt-4 text-center">
-        <Link to="/blog" className="text-red-500 hover:text-red-600 font-semibold">
+        <Link to="/blog" className= "text-[#b21e4b] hover:text-red-600 font-semibold">
           Read more blogs
         </Link>
       </div>

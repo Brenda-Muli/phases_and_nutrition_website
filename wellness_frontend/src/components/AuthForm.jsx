@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 const AuthForm = ({ route, method }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");          
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
@@ -26,7 +27,7 @@ const AuthForm = ({ route, method }) => {
     setSuccess(null);
 
     try {
-      const res = await api.post(route, { username, password });
+      const res = await api.post(route, { username, password, email });
       if (isLogin) {
         localStorage.setItem(ACCESS_TOKEN, res.data.access);
         localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
@@ -77,7 +78,7 @@ const AuthForm = ({ route, method }) => {
         }}
       />
 
-      <div className="flex items-center justify-center w-full h-full relative z-10">
+      <div className="flex items-center justify-center w-full h-full relative z-10 ">
         <motion.div
           className="flex items-center justify-center w-3/4 lg:w-1/2 rounded-lg shadow-lg bg-[rgba(255,182,193,0.3)] overflow-hidden"
           initial={{ opacity: 0, scale: 0.95 }}
@@ -96,6 +97,23 @@ const AuthForm = ({ route, method }) => {
                 <h2 className="text-[#b31d3f] text-xl mb-4 font-bold">{isLogin ? "LOGIN" : "SIGN UP"}</h2>
                 {error && <div className="text-red-600 mb-2">{error}</div>}
                 {success && <div className="text-green-600 mb-2">{success}</div>}
+                {!isLogin && (
+                  <>
+                    
+                    <div className="mb-4">
+                      <label htmlFor="email" className="text-sm font-bold text-[#8d0e32]">EMAIL:</label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        className="w-full p-2 border border-[#8d0e32] rounded"
+                      />
+                    </div>
+                  </>
+                )}
                 <div className="mb-4">
                   <label htmlFor="username" className="text-sm font-bold text-[#8d0e32]">USERNAME:</label>
                   <input
@@ -143,7 +161,7 @@ const AuthForm = ({ route, method }) => {
               </form>
             )}
           </div>
-  
+
           {/* Image Section */}
           <motion.div
             className={`flex items-center justify-center w-1/2 h-full ${isLogin ? "order-2" : "order-1"}`}

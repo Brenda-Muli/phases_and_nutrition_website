@@ -11,16 +11,22 @@ function Home() {
     <>
       {/* Intro Section with Motion */}
       <motion.section
-        className="flex items-start justify-start p-8 bg-white mb-8"
+        style={{
+          backgroundImage: "url('/photos/phases_image.JPG')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+        className="relative flex items-start justify-start p-8 bg-white "
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <div className="w-full max-w-2xl pt-9">
-          <h2 className="text-5xl font-semibold text-left  mb-4 text-[#801b40] font-playfair">
+        
+        <div className="w-full max-w-2xl pt-9 ml-28">
+          <h2 className="text-5xl font-semibold text-center mb-4 text-[#801b40] font-playfair ">
             Wellness in <span className="text-[#b21e4b]">Phases</span>
           </h2>
-          <p className="text-lg mt-2 text-left text-gray-600 text-[#470a1f]">
+          <p className="text-lg mt-2 text-left text-[#801b40] ">
           Hey There! Understanding your menstrual cycle is essential for feeling your best, and we’re here to make it simple and straightforward for you. Our goal is to provide you with clear, accessible information so you can manage your menstrual health with confidence. 
           </p>
         </div>
@@ -43,9 +49,7 @@ function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.5 }}
-          style={{
-            background: "linear-gradient(to top,#f27a93, #fbd0d9 ", 
-          }}
+         
           
         >
           {/* Card 1 */}
@@ -173,7 +177,7 @@ function Home() {
           transition={{ delay: 1.2, duration: 0.5 }}
         >
           <p className="text-5xl text-[#951c45] font-playfair">Menstrual cycle <span className="text-4xl text-[#b21e4b]"> FAQs</span> </p>
-          <p className="text-lg text-[#411020]">
+          <p className="text-md text-[#411020]">
             Find answers to common questions about the phases of the menstrual cycle.
           </p>
         </motion.div>
@@ -199,7 +203,7 @@ function Home() {
               initial={{ opacity: 0 }}
               animate={{
                 opacity: openFAQ === 1 ? 1 : 0,
-                height: openFAQ === 1 ? "auto" : 0, // Toggle height for smooth transition
+                height: openFAQ === 1 ? "auto" : 0, 
               }}
               transition={{ duration: 0.3 }}
               

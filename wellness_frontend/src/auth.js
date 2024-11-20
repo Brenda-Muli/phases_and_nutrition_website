@@ -1,10 +1,12 @@
 import {useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import {jwtDecode} from "jwt-decode";
 import api from "./api";
 import { ACCESS_TOKEN, REFRESH_TOKEN, GOOGLE_ACCESS_TOKEN } from "./token";
 
 export const useAuthentication = () => {
   const [isAuthorized, setIsAuthorized] = useState(false);
+  const navigate = useNavigate();
 
   useEffect (() => {
     const auth = async () => {
@@ -74,12 +76,12 @@ export const useAuthentication = () => {
       return false;
     }
   };
-
+  
   const logout = () => {
     localStorage.removeItem(ACCESS_TOKEN);
     localStorage.removeItem(GOOGLE_ACCESS_TOKEN);
     setIsAuthorized(false);
-    window.location.reload();
+    navigate('/header');
   }
   return { isAuthorized, logout};
 }

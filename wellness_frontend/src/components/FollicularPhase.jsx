@@ -125,7 +125,7 @@ function FollicularPhase() {
       transition={{ duration: 1 }}
       viewport={{ once: false, amount: 0.5 }}
     >
-      This is a time when energy levels typically rise, so focus on replenishing nutrients to support your body’s increased activity and metabolic needs. Include protein-rich foods like eggs, lean meats, and legumes to help build muscle and support cell repair. It's also an excellent time to include antioxidant-rich fruits and vegetables, such as berries, leafy greens, and cruciferous vegetables, to combat oxidative stress and promote hormonal balance. You can click on any of these foods to learn more about them and add them to your personalized notes for easy reference later. Simply click on an ingredient to save it, and you'll have a handy list of foods to include in your diet.
+      This is a time when energy levels typically rise, so focus on replenishing nutrients to support your body’s increased activity and metabolic needs. Include protein-rich foods like eggs, lean meats, and legumes to help build muscle and support cell repair. It's also an excellent time to include antioxidant-rich fruits and vegetables, such as berries, leafy greens,  to combat oxidative stress and promote hormonal balance. You can click on any of these foods to learn more about them and add them to your personalized notes for easy reference later. Simply click on an ingredient to save it, and you'll have a handy list of foods to include in your diet.
 
     </motion.p>
 
