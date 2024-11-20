@@ -81,7 +81,7 @@ export const useAuthentication = () => {
     localStorage.removeItem(ACCESS_TOKEN);
     localStorage.removeItem(GOOGLE_ACCESS_TOKEN);
     setIsAuthorized(false);
-    navigate('/header');
+    navigate('/');
   }
   return { isAuthorized, logout};
 }

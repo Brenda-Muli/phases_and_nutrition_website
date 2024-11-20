@@ -9,7 +9,7 @@ function Navbar() {
   const navbarRef = useRef(null);
   const navigate = useNavigate();
   
-  const { isAuthorized, handleLogout } = useAuthentication(); 
+  const { isAuthorized, logout } = useAuthentication(); 
 
   const lastScrollY = useRef(0); 
 
@@ -48,11 +48,11 @@ function Navbar() {
 
   return (
     <div
-      className={`fixed w-full bg-white z-10 transition-transform duration-300 ${isVisible ? "translate-y-0" : "-translate-y-full pb-9"}`}
+      className={`fixed w-full bg-white z-10 transition-transform duration-300 ${isVisible ? "translate-y-0" : "-translate-y-full "}`}
     >
       <nav
         ref={navbarRef}
-        className="max-w-6xl mx-auto p-4 flex justify-between items-center font-calistoga h-16"
+        className="max-w-6xl mx-auto p-4 flex justify-between items-center font-calistoga "
       >
         <div className="flex items-center">
           {isAuthorized && (
@@ -120,7 +120,7 @@ function Navbar() {
               </li>
               <li>
                 <button
-                  onClick={handleLogout} // Using the logout function from the hook
+                  onClick={logout} 
                   className="text-[#b21e4b] hover:text-[#C71A31] font-bold"
                 >
                   LOGOUT

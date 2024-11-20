@@ -61,15 +61,15 @@ const AuthForm = ({ route, method }) => {
   };
 
   return (
-    <div className="relative flex h-screen overflow-hidden">
+    <div className="relative flex h-screen overflow-hidden ">
       {/* Circle background */}
       <motion.div
         className="absolute inset-0 bg-gradient-to-r from-[#fbd0d9] to-[#fef2f4] rounded-full z-0"
         initial={{ left: isLogin ? "50%" : "-40%", top: "-50%", width: "600px", height: "600px" }} 
         animate={{
           left: isLogin ? "60%" : "-20%",
-          top: "-40%",
-          width: "800px", 
+          top: "10%",
+          width: "850px", 
           height: "800px", 
         }}
         transition={{
@@ -78,7 +78,7 @@ const AuthForm = ({ route, method }) => {
         }}
       />
 
-      <div className="flex items-center justify-center w-full h-full relative z-10 ">
+      <div className="flex items-center justify-center w-full h-full relative z-10 pt-16 ">
         <motion.div
           className="flex items-center justify-center w-3/4 lg:w-1/2 rounded-lg shadow-lg bg-[rgba(255,182,193,0.3)] overflow-hidden"
           initial={{ opacity: 0, scale: 0.95 }}
@@ -86,7 +86,7 @@ const AuthForm = ({ route, method }) => {
           transition={{ duration: 0.5 }}
         >
           {/* Authentication Form */}
-          <div className={`flex flex-col items-center justify-center w-1/2 p-6 ${isLogin ? "order-1" : "order-2"}`}>
+          <div className={`flex flex-col items-center justify-center w-1/2 p-6  ${isLogin ? "order-1" : "order-2"}`}>
             {loading && (
               <div>
                 {error ? <span className="text-red-600">{error}</span> : <div></div>}
