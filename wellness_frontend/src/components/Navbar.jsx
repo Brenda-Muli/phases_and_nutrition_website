@@ -124,6 +124,14 @@ function Navbar() {
                 </Link>
               </li>
               <li>
+                <Link
+                  to="/calendar"
+                  className="text-[#b21e4b] hover:text-[#C71A31] font-bold"
+                >
+                  CALENDAR
+                </Link>
+              </li>
+              <li>
                 <button
                   onClick={logout} 
                   className="text-[#b21e4b] hover:text-[#C71A31] font-bold"

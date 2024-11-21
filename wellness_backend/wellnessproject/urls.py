@@ -35,7 +35,8 @@ urlpatterns = [
     path('summernote/', include('django_summernote.urls')), 
     path('api/blog/', include('blogs.urls')),
     path('api/meal/', include('meal.urls')),
-    path('api/phases/', include('phases.urls'))
+    path('api/phases/', include('phases.urls')),
+    path('api/calendar/', include("phasescalendar.urls"))
     
 ]  
 

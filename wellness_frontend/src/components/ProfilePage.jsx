@@ -5,19 +5,18 @@ import { useLocation } from "react-router-dom";
 
 function ProfilePage() {
   const [userProfile, setUserProfile] = useState({
-    username: "",
     bio: "",
     profile_picture: null,
     saved_ingredients: [],
   });
-  const [ingredients, setIngredients] = useState([]);
+  const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [error, setError] = useState(null);
 
   // Get selectedIngredients from location state
   const location = useLocation();
-  const { selectedIngredients } = location.state || { selectedIngredients: [] };
+  const { selectedIngredients: locationIngredient } = location.state || { selectedIngredients: [] };
 
   // Axios instance with interceptors
   const axiosInstance = axios.create();
@@ -74,36 +73,46 @@ function ProfilePage() {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const response = await axiosInstance.get("http://localhost:8000/api/phases/profile/");
-        setUserProfile(response.data);
-        setLoading(false);
+        const profileResponse = await axios.get("http://localhost:8000/api/phases/profile/", 
+          { headers: { Authorization: `Bearer ${localStorage.getItem("access")}` } }
+        );
+      const {bio, profile_picture, saved_ingredients} = profileResponse.data;
+        setUserProfile({
+        bio, profile_picture, saved_ingredients
+        });
+        setSelectedIngredients(saved_ingredients || []);
       } catch (error) {
-        console.error("Error fetching profile data:", error.response || error.message);
+        console.error("Error fetching profile data:", error);
         setError("Error fetching profile data. Please try again later.");
         setLoading(false);
       }
     };
 
-    const fetchIngredients = async () => {
+    fetchUserProfile();
+  }, []);
+
+  // Fetch phase-specific ingredients
+  useEffect(() => {
+    const fetchPhaseIngredients = async () => {
       try {
-        const response = await axiosInstance.get("http://localhost:8000/api/meal/ingredients/");
+        const response = await axios.get(
+          'http://localhost:8000/api/phases/profile/ingredients/', 
+          { headers: { Authorization: `Bearer ${localStorage.getItem("access")}` } }
+        );
         setIngredients(response.data);
       } catch (error) {
-        console.error("Error fetching ingredients:", error.response || error.message);
-        setError("Error fetching ingredients. Please try again later.");
+        console.error("Error fetching phase-specific ingredients:", error);
+        setError("Error fetching phase ingredients. Please try again later.");
       }
     };
 
-    fetchUserProfile();
-    fetchIngredients();
-  }, []);
+    fetchPhaseIngredients();
+  }, []); 
 
   if (loading) return <div>Loading...</div>;
 
   return (
     <div className="profile-container mt-5">
-      <h1 className="text-3xl font-bold mb-4">User Profile</h1>
-
       {error && (
         <div className="alert alert-danger">
           <p>{error}</p>
@@ -152,7 +161,6 @@ function ProfilePage() {
                       alt={ingredient.name}
                       className="w-16 h-16 object-cover rounded"
                     />
-                    <p className="text-sm">{ingredient.description}</p>
                   </li>
                 ))
               ) : (

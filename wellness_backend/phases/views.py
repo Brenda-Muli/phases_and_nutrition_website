@@ -2,7 +2,8 @@ from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from .models import UserProfile
 from rest_framework.response import Response
-import os
+from meal.serializers import IngredientSerializer
+from rest_framework.views import APIView
 from meal.models import Ingredient
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import generics
@@ -111,6 +112,19 @@ class UserProfileDetailView(RetrieveUpdateAPIView):
 
         
         return Response(user_profile_data, status=status.HTTP_200_OK)
+    
+
+class ProfileIngredientsView(APIView):
+    permission_classes = [IsAuthenticated]  
+
+    def get(self, request):
+        user_profile = request.user.profile  
+        ingredients = user_profile.saved_ingredients.all()  
+        
+        # Serialize the ingredients to return them as a response
+        serializer = IngredientSerializer(ingredients, many=True)
+        return Response(serializer.data)
+
 
 @api_view(['PATCH'])
 @permission_classes([IsAuthenticated])
@@ -129,10 +143,13 @@ def update_user_profile(request):
         return Response(serializer.data, status=status.HTTP_200_OK)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])  
 def add_ingredient_to_profile(request):
+    print(f"Request data: {request.data}")
     ingredient_id = request.data.get('ingredient_id')
+    print(f"Received ingredient_id: {ingredient_id}")
     if not ingredient_id:
         return JsonResponse({"error": "Ingredient ID is required."}, status=status.HTTP_400_BAD_REQUEST)
 

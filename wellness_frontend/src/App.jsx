@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import AuthPage from "./pages/AuthPage";
-import { useAuthentication } from "./auth"; // Use hook here
+import { useAuthentication } from "./auth"; 
 import NotFound from "./pages/NotFound";
 import RedirectGoogleAuth from "./components/GoogleRedirectHandler";
 import BlogPostList from "./components/BlogPostList";
@@ -14,6 +14,9 @@ import Header from "./components/Header";
 import './index.css';
 import PhaseDetail from "./components/PhaseDetail";
 import UserProfile from "./components/ProfilePage";
+import CycleCalendar from "./components/CycleCalendar";
+import MenstrualDataForm from "./components/MenstrualDataForm";
+
 
 function App() {
   return (
@@ -31,6 +34,8 @@ function App() {
         <Route path="/featured" element={<BlogFeatured />} />
         <Route path="/blog/category" element={<BlogPostCategory />} />
         <Route path="/profile" element={<UserProfile />} />
+        <Route path="/calendar" element={<CycleCalendar />} />
+        <Route path="/calendarform" element={<MenstrualDataForm />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

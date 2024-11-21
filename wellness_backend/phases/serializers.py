@@ -46,7 +46,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
                   {
                       'id': ingredient.id,
                       'name': ingredient.name,
-                      'image': f"https://res.cloudinary.com/{cloud_name}/{ingredient.image}" if ingredient.image else None
+                      'image': ingredient.image if ingredient.image else None
                   }
                   for ingredient in ingredients
               ]
