@@ -99,7 +99,7 @@ function ProfilePage() {
           'http://localhost:8000/api/phases/profile/ingredients/', 
           { headers: { Authorization: `Bearer ${localStorage.getItem("access")}` } }
         );
-        setIngredients(response.data);
+        setSelectedIngredients(response.data);
       } catch (error) {
         console.error("Error fetching phase-specific ingredients:", error);
         setError("Error fetching phase ingredients. Please try again later.");

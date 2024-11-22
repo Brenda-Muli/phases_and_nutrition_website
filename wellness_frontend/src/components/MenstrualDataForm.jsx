@@ -23,38 +23,59 @@ const MenstrualDataForm = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Cycle Length (28-30 days):</label>
-        <input
-          type="number"
-          value={cycleLength}
-          onChange={(e) => setCycleLength(e.target.value)}
-          min="28"
-          max="30"
-          required
-        />
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="bg-[rgba(255,182,193,0.3)] p-6 rounded-lg shadow-lg w-full sm:w-96">
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label htmlFor="cycleLength" className="text-sm font-bold text-[#8d0e32]">
+              Cycle Length (28-30 days):
+            </label>
+            <input
+              type="number"
+              id="cycleLength"
+              value={cycleLength}
+              onChange={(e) => setCycleLength(e.target.value)}
+              min="28"
+              max="30"
+              required
+              className="w-full p-2 border border-[#8d0e32] rounded"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="periodLength" className="text-sm font-bold text-[#8d0e32]">
+              Period Length (days):
+            </label>
+            <input
+              type="number"
+              id="periodLength"
+              value={periodLength}
+              onChange={(e) => setPeriodLength(e.target.value)}
+              required
+              className="w-full p-2 border border-[#8d0e32] rounded"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="lastPeriodDate" className="text-sm font-bold text-[#8d0e32]">
+              Last Period Date:
+            </label>
+            <input
+              type="date"
+              id="lastPeriodDate"
+              value={lastPeriodDate}
+              onChange={(e) => setLastPeriodDate(e.target.value)}
+              required
+              className="w-full p-2 border border-[#8d0e32] rounded"
+            />
+          </div>
+          <button
+            type="submit"
+            className="bg-[#d5294d] text-white p-2 rounded w-full hover:bg-red-700"
+          >
+            Submit
+          </button>
+        </form>
       </div>
-      <div>
-        <label>Period Length (days):</label>
-        <input
-          type="number"
-          value={periodLength}
-          onChange={(e) => setPeriodLength(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label>Last Period Date:</label>
-        <input
-          type="date"
-          value={lastPeriodDate}
-          onChange={(e) => setLastPeriodDate(e.target.value)}
-          required
-        />
-      </div>
-      <button type="submit">Submit</button>
-    </form>
+    </div>
   );
 };
 

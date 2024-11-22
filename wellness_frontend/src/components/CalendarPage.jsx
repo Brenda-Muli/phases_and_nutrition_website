@@ -1,36 +1,45 @@
 import React, { useState } from "react";
+import axios from "axios";
 import MenstrualDataForm from "./MenstrualDataForm"; 
 import CycleCalendar from "./CycleCalendar"; 
 import { Button } from "react-bootstrap"; 
 
-function CalendarPage (){
+function CalendarPage() {
   const [isFormOpen, setIsFormOpen] = useState(false); 
-  const [calendarData, setCalendarData] = useState(null); 
 
   // Handles form submission and sends the data to backend
-  const handleFormSubmit = async (formData) => {
-    const response = await fetch('http://127.0.0.1:8000/api/phasescalendar/posted_data/', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
+  const handleFormSubmit = async (formData) => { 
+    console.log('Form Data:', formData);
 
-    if (response.ok) {
-      const data = await response.json();
-      setCalendarData(data); 
-      setIsFormOpen(false); 
-    } else {
-      alert("Error submitting data");
-    }
-  };
+  
+    let data = formData
+  
+    
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'http://127.0.0.1:8000/api/calendar/current_phase/',
+      headers: { 
+        'Content-Type': 'application/json', 
+        'Authorization': `Bearer ${localStorage.getItem("access")}`
+      },
+      data : data
+    };
+    
+    axios.request(config)
+    .then((response) => {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+    
 
   return (
     <div>
       <div style={{ marginBottom: "20px" }}>
         {/* Button to toggle form visibility */}
-        {!calendarData && (
+        {!isFormOpen && (
           <Button onClick={() => setIsFormOpen(!isFormOpen)}>
             {isFormOpen ? "Cancel" : "Enter Your Details"}
           </Button>
@@ -43,9 +52,9 @@ function CalendarPage (){
       )}
 
       {/* Display the calendar once the form is submitted */}
-      {calendarData && <CycleCalendar data={calendarData} />}
+      <CycleCalendar /> 
     </div>
   );
 };
-
+};
 export default CalendarPage;

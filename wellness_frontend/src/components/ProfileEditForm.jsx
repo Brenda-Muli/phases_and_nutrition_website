@@ -62,9 +62,10 @@ function ProfileEditForm({ userProfile, setUserProfile, ingredients, setIsEditin
   };
 
   return (
-    <form onSubmit={handleUpdateProfile} className="profile-update-form">
+  <form onSubmit={handleUpdateProfile} className="flex flex-col items-center justify-center min-h-screen">
+    <div className="bg-[rgba(255,182,193,0.3)] p-6 rounded-lg shadow-lg w-full sm:w-96">
       <div className="form-group mb-4">
-        <label htmlFor="bio" className="block font-semibold mb-2">
+        <label htmlFor="bio" className="block font-semibold text-[#8d0e32] mb-2">
           Update Bio
         </label>
         <textarea
@@ -73,13 +74,13 @@ function ProfileEditForm({ userProfile, setUserProfile, ingredients, setIsEditin
           onChange={(e) =>
             setUserProfile((prev) => ({ ...prev, bio: e.target.value }))
           }
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border border-[#8d0e32] rounded"
           rows="4"
           placeholder="Update your bio..."
         />
       </div>
       <div className="form-group mb-4">
-        <label htmlFor="profile_picture" className="block font-semibold mb-2">
+        <label htmlFor="profile_picture" className="block font-semibold text-[#8d0e32] mb-2">
           Profile Picture
         </label>
         <input
@@ -87,13 +88,18 @@ function ProfileEditForm({ userProfile, setUserProfile, ingredients, setIsEditin
           id="profile_picture"
           onChange={handleImageChange}
           accept="image/*"
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border border-[#8d0e32] rounded"
         />
       </div>
-      <button type="submit" className="px-6 py-2 bg-blue-500 text-white rounded">
+      <button
+        type="submit"
+        className="px-6 py-2 bg-[#d5294d] text-white rounded w-full hover:bg-red-700"
+      >
         Update Profile
       </button>
-    </form>
+    </div>
+  </form>
+
   );
 }
 

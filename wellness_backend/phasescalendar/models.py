@@ -24,8 +24,8 @@ class MenstrualCycle(models.Model):
     elif cycle_day < self.cycle_length -14:
       return 'Follicular'
     
-    elif cycle_day < self.cycle_length - 7:
-      return 'Ovulatory'
+    elif cycle_day >= self.cycle_length - 14 and cycle_day < self.cycle_length - 7:
+       return 'Ovulatory'
 
     else:
-      return 'luteal'
+      return 'Luteal'

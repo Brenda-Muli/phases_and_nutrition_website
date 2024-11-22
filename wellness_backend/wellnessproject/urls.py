@@ -36,7 +36,7 @@ urlpatterns = [
     path('api/blog/', include('blogs.urls')),
     path('api/meal/', include('meal.urls')),
     path('api/phases/', include('phases.urls')),
-    path('api/calendar/', include("phasescalendar.urls"))
+    path('api/calendar/', include("phasescalendar.urls")),
     
 ]  
 
