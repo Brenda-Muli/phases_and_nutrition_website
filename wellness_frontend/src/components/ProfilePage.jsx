@@ -25,9 +25,8 @@ function ProfilePage() {
   axiosInstance.interceptors.request.use(
     (config) => {
       const token = localStorage.getItem("access");
-      console.log("Token from localStorage:", token); 
       if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+        config.headers.Authorization = `Bearer ${access}`;
       }
       return config;
     },
@@ -51,7 +50,7 @@ function ProfilePage() {
 
             // Update axios default headers with the new access token
             axiosInstance.defaults.headers["Authorization"] = `Bearer ${response.data.access}`;
-            
+
             // Retry the original request with the new token
             originalRequest.headers["Authorization"] = `Bearer ${response.data.access}`;
             return axiosInstance(originalRequest);
@@ -62,7 +61,7 @@ function ProfilePage() {
           console.error("Error refreshing token", err);
           localStorage.removeItem("access");
           localStorage.removeItem("refresh");
-          window.location.href = "/login"; 
+          window.location.href = "/login";
         }
       }
       return Promise.reject(error);
@@ -72,15 +71,20 @@ function ProfilePage() {
   // Fetch user profile and ingredients
   useEffect(() => {
     const fetchUserProfile = async () => {
+      const token = localStorage.getItem("access");
+      if (!token) {
+        console.error("Access token is missing.");
+        window.location.href = "/login"; // Redirect to login if no token is found
+        return;
+      }
+
       try {
-        const profileResponse = await axios.get("http://localhost:8000/api/phases/profile/", 
-          { headers: { Authorization: `Bearer ${localStorage.getItem("access")}` } }
+        const profileResponse = await axiosInstance.get(
+          "http://localhost:8000/api/phases/profile/"
         );
-      const {bio, profile_picture, saved_ingredients} = profileResponse.data;
-        setUserProfile({
-        bio, profile_picture, saved_ingredients
-        });
-        setSelectedIngredients(saved_ingredients || []);
+        const { bio, profile_picture, saved_ingredients } = profileResponse.data;
+        setUserProfile({ bio, profile_picture, saved_ingredients });
+        setSelectedIngredients(saved_ingredients || []); // Initially set with saved ingredients
       } catch (error) {
         console.error("Error fetching profile data:", error);
         setError("Error fetching profile data. Please try again later.");
@@ -90,24 +94,6 @@ function ProfilePage() {
 
     fetchUserProfile();
   }, []);
-
-  // Fetch phase-specific ingredients
-  useEffect(() => {
-    const fetchPhaseIngredients = async () => {
-      try {
-        const response = await axios.get(
-          'http://localhost:8000/api/phases/profile/ingredients/', 
-          { headers: { Authorization: `Bearer ${localStorage.getItem("access")}` } }
-        );
-        setSelectedIngredients(response.data);
-      } catch (error) {
-        console.error("Error fetching phase-specific ingredients:", error);
-        setError("Error fetching phase ingredients. Please try again later.");
-      }
-    };
-
-    fetchPhaseIngredients();
-  }, []); 
 
   if (loading) return <div>Loading...</div>;
 
@@ -123,11 +109,11 @@ function ProfilePage() {
         <ProfileEditForm
           userProfile={userProfile}
           setUserProfile={setUserProfile}
-          ingredients={ingredients}
+          ingredients={selectedIngredients}
           setIsEditing={setIsEditing}
         />
       ) : (
-        <div className="profile-details">
+        <div className="profile-details pt-16">
           {/* Profile Picture */}
           <div className="profile-picture mb-4">
             <img
@@ -143,14 +129,12 @@ function ProfilePage() {
 
           {/* Profile Info */}
           <div className="profile-info mb-4">
-            <p className="text-xl font-semibold">{userProfile.username}</p>
-            <p className="text-md text-gray-600">{userProfile.bio || "No bio available."}</p>
+            <p className="block text-[#8d0e32] mb-2">{userProfile.bio || "No bio available."}</p>
           </div>
-
 
           {/* Selected Ingredients (from location state) */}
           <div className="selected-ingredients">
-            <h3 className="font-semibold">Recently Selected Ingredients:</h3>
+            <h3 className="block font-semibold text-[#8d0e32] mb-2">Recently Selected Ingredients:</h3>
             <ul>
               {selectedIngredients.length > 0 ? (
                 selectedIngredients.map((ingredient) => (
@@ -172,7 +156,7 @@ function ProfilePage() {
           {/* Edit Button */}
           <button
             onClick={() => setIsEditing(true)}
-            className="mt-4 px-6 py-2 bg-blue-500 text-white rounded"
+            className="px-6 py-2 bg-[#d5294d] text-white rounded w-50 hover:bg-red-700"
           >
             Change Profile Data
           </button>
