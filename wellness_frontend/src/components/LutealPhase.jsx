@@ -62,6 +62,45 @@ function LutealPhase() {
   const prevPage = () => {
     if (currentPage > 0) setCurrentPage(currentPage - 1);
   };
+  const handleIngredientSelect = async (ingredient) => {
+    try {
+      const response = await axios.post(
+        'http://localhost:8000/api/phases/profile/add-ingredient/', 
+        { ingredient_id: ingredient.id }, 
+        { headers: { Authorization: `Bearer ${localStorage.getItem("token")}`
+      }}
+      );
+      setSelectedIngredients((prev) => [...prev, ingredient]);
+      alert(`${ingredient.name} added to profile!`);
+      
+      const updatedResponse = await axios.get(
+        'http://localhost:8000/api/phases/profile/ingredients/',
+        { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
+      );
+      
+      // Update the selected ingredients in the state
+      setSelectedIngredients(updatedResponse.data);
+    } catch (error) {
+      console.error("Error saving ingredient to profile:", error);
+    };
+  };
+
+  
+  useEffect(() => {
+    const fetchSelectedIngredients = async () => {
+      try {
+        const response = await axios.get(
+          'http://localhost:8000/api/phases/profile/ingredients/',
+          { headers: { Authorization: `Bearer ${localStorage.getItem("token")} `} }
+        );
+        setSelectedIngredients(response.data);
+      } catch (error) {
+        console.error("Error fetching selected ingredients:", error);
+      }
+    };
+  
+    fetchSelectedIngredients();
+  }, []);
 
   return (
     <div className = "ml-1">

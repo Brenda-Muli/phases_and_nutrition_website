@@ -92,7 +92,7 @@ function Navbar() {
                         <Link
                           key={phase.slug}
                           to={`/phases/${phase.slug}`}
-                          className="block px-4 py-2 text-sm text-[#d42a5b] hover:bg-[#e63f66]"
+                          className="block px-4 py-2 text-sm text-[#d42a5b] hover:bg-[#fbf4f7]"
                           onClick={() => setSubmenuVisible(false)}
                         >
                           {phase.name}
@@ -102,14 +102,7 @@ function Navbar() {
                   </motion.div>
                 )}
               </li>
-              <li>
-                <Link
-                  to="/blog"
-                  className="text-[#b21e4b] hover:text-[#C71A31] font-bold"
-                >
-                  BLOGS
-                </Link>
-              </li>
+              
               <li>
                 <Link to="/profile" className="flex items-center space-x-2">
                   <img 
