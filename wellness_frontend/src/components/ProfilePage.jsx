@@ -14,80 +14,39 @@ function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false);
   const [error, setError] = useState(null);
 
-  // Get selectedIngredients from location state
+  // Get selectedIngredients from location state (if passed)
   const location = useLocation();
   const { selectedIngredients: locationIngredient } = location.state || { selectedIngredients: [] };
 
-  // Axios instance with interceptors
   const axiosInstance = axios.create();
 
-  // Add request interceptor to attach token to requests
-  axiosInstance.interceptors.request.use(
-    (config) => {
-      const token = localStorage.getItem("access");
-      if (token) {
-        config.headers.Authorization = `Bearer ${access}`;
-      }
-      return config;
-    },
-    (error) => Promise.reject(error)
-  );
-
-  // Add response interceptor to handle token expiration
-  axiosInstance.interceptors.response.use(
-    (response) => response,
-    async (error) => {
-      const originalRequest = error.config;
-      if (error.response.status === 401 && !originalRequest._retry) {
-        originalRequest._retry = true;
-        try {
-          const refreshToken = localStorage.getItem("refresh");
-          if (refreshToken) {
-            const response = await axios.post("http://localhost:8000/api/token/refresh/", {
-              refresh: refreshToken,
-            });
-            localStorage.setItem("access", response.data.access);
-
-            // Update axios default headers with the new access token
-            axiosInstance.defaults.headers["Authorization"] = `Bearer ${response.data.access}`;
-
-            // Retry the original request with the new token
-            originalRequest.headers["Authorization"] = `Bearer ${response.data.access}`;
-            return axiosInstance(originalRequest);
-          } else {
-            throw new Error("No refresh token available");
-          }
-        } catch (err) {
-          console.error("Error refreshing token", err);
-          localStorage.removeItem("access");
-          localStorage.removeItem("refresh");
-          window.location.href = "/login";
-        }
-      }
-      return Promise.reject(error);
-    }
-  );
-
-  // Fetch user profile and ingredients
   useEffect(() => {
     const fetchUserProfile = async () => {
-      const token = localStorage.getItem("access");
-      if (!token) {
+      const access = localStorage.getItem("access");
+      if (!access) {
         console.error("Access token is missing.");
-        window.location.href = "/login"; // Redirect to login if no token is found
+        window.location.href = "/login"; 
         return;
       }
 
       try {
-        const profileResponse = await axiosInstance.get(
-          "http://localhost:8000/api/phases/profile/"
-        );
-        const { bio, profile_picture, saved_ingredients } = profileResponse.data;
-        setUserProfile({ bio, profile_picture, saved_ingredients });
-        setSelectedIngredients(saved_ingredients || []); // Initially set with saved ingredients
+        const profileResponse = await axiosInstance.get("http://localhost:8000/api/phases/profile/", {
+          headers: { Authorization: `Bearer ${access}` }
+        });
+
+        // Accessing profile data correctly from the response
+        const { bio, profile_picture, saved_ingredients } = profileResponse.data.profile;
+        
+        // Ensure that the profile_picture URL is formatted correctly 
+        const formattedProfilePicture = profile_picture && profile_picture.startsWith('https://res.cloudinary.com') 
+          ? profile_picture 
+          : `/photos/defaultprofile.JPG`; 
+        setUserProfile({ bio, profile_picture: formattedProfilePicture, saved_ingredients });
+        setSelectedIngredients(saved_ingredients || []);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching profile data:", error);
-        setError("Error fetching profile data. Please try again later.");
+        setError(error.response ? error.response.data.message : "Error fetching profile data. Please try again later.");
         setLoading(false);
       }
     };
@@ -117,11 +76,7 @@ function ProfilePage() {
           {/* Profile Picture */}
           <div className="profile-picture mb-4">
             <img
-              src={
-                userProfile.profile_picture
-                  ? userProfile.profile_picture
-                  : "/photos/defaultprofile.JPG"
-              }
+              src={userProfile.profile_picture ? userProfile.profile_picture : "/photos/defaultprofile.JPG"}
               alt="Profile"
               className="w-32 h-32 object-cover rounded-full"
             />
@@ -129,29 +84,30 @@ function ProfilePage() {
 
           {/* Profile Info */}
           <div className="profile-info mb-4">
-            <p className="block text-[#8d0e32] mb-2">{userProfile.bio || "No bio available."}</p>
+            <p className="block text-black italic font-semibold mb-2">{userProfile.bio || "No bio available."}</p>
           </div>
 
-          {/* Selected Ingredients (from location state) */}
+          {/* Saved Ingredients */}
           <div className="selected-ingredients">
-            <h3 className="block font-semibold text-[#8d0e32] mb-2">Recently Selected Ingredients:</h3>
-            <ul>
+            <h3 className="block font-semibold text-[#8d0e32] mb-2">Saved Ingredients:</h3>
+            <ul className="grid grid-cols-3 gap-2 justify-start"> 
               {selectedIngredients.length > 0 ? (
                 selectedIngredients.map((ingredient) => (
                   <li key={ingredient.id} className="mb-2">
                     <h4 className="text-md font-semibold">{ingredient.name}</h4>
                     <img
-                      src={ingredient.image}
+                      src={ingredient.image ? ingredient.image : "/images/default-ingredient.jpg"}
                       alt={ingredient.name}
-                      className="w-16 h-16 object-cover rounded"
+                      className="w-16 h-16 object-cover rounded " 
                     />
                   </li>
                 ))
               ) : (
-                <p>No ingredients selected yet.</p>
+                <p>No saved ingredients yet.</p>
               )}
             </ul>
           </div>
+
 
           {/* Edit Button */}
           <button

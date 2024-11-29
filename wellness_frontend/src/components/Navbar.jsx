@@ -15,9 +15,9 @@ function Navbar() {
 
   const phases = [
     { name: "Menstrual Phase", slug: "menstrual" },
+    { name: "Follicular Phase", slug: "follicular" },
     { name: "Ovulatory Phase", slug: "ovulatory" },
     { name: "Luteal Phase", slug: "luteal" },
-    { name: "Follicular Phase", slug: "follicular" },
   ];
 
   const handleScroll = () => {
@@ -48,51 +48,55 @@ function Navbar() {
 
   return (
     <div
-      className={`fixed w-full bg-white z-10 transition-transform duration-300 ${isVisible ? "translate-y-0" : "-translate-y-full "}`}
+      className={`fixed w-full bg-white z-10 transition-transform duration-300 ${isVisible ? "translate-y-0" : "-translate-y-full"}`}
     >
       <nav
         ref={navbarRef}
-        className="max-w-6xl mx-auto p-4 flex justify-between items-center font-calistoga "
+        className="max-w-6xl mx-auto p-4 flex items-center justify-between "
       >
-        <div className="flex items-center">
-          {isAuthorized && (
-            <Link
-              to="/home"
-              className="text-[#b21e4b] hover:text-[#C71A31] font-bold mr-4"
-            >
-              HOME
-            </Link>
-          )}
+        {/* Logo on the left */}
+        <div className="flex-shrink-0">
+          <Link to="/home">
+            <img 
+              src="/photos/logo.png" 
+              alt="Logo" 
+              className="w-5 h-5 rounded-full"
+            />
+          </Link>
         </div>
 
-        <ul className="flex space-x-4 pr-8">
+        {/* Centered navigation links */}
+        <ul className="flex space-x-8 flex-grow justify-center">
           {isAuthorized ? (
             <>
-              <li className="relative">
+              <li>
                 <Link
-                  to="#"
+                  to="/home"
                   className="text-[#b21e4b] hover:text-[#C71A31] font-bold"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setSubmenuVisible(!submenuVisible);
-                  }}
+                >
+                  HOME
+                </Link>
+              </li>
+              <li className="relative">
+                <button
+                  onClick={() => setSubmenuVisible(!submenuVisible)}
+                  className="text-[#b21e4b] hover:text-[#C71A31] font-bold"
                 >
                   PHASES
-                </Link>
-
+                </button>
                 {submenuVisible && (
                   <motion.div
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    className="absolute left-0 w-48 mt-2 text-white rounded-md shadow-lg"
+                    className="absolute left-0 w-48 mt-2 bg-white rounded-md shadow-lg"
                   >
                     <div className="py-1">
                       {phases.map((phase) => (
                         <Link
                           key={phase.slug}
                           to={`/phases/${phase.slug}`}
-                          className="block px-4 py-2 text-sm text-[#d42a5b] hover:bg-[#fbf4f7]"
+                          className="block px-4 py-2 text-sm text-[#b21e4b] hover:bg-[#fbf4f7]"
                           onClick={() => setSubmenuVisible(false)}
                         >
                           {phase.name}
@@ -102,18 +106,12 @@ function Navbar() {
                   </motion.div>
                 )}
               </li>
-              
               <li>
-                <Link to="/profile" className="flex items-center space-x-2">
-                  <img 
-                    src="/photos/defaultprofile.JPG" 
-                    alt="Profile"
-                    className="w-6 h-6 rounded-full" 
-                    
-                  />
-                <span className="text-[#b21e4b] hover:text-[#C71A31] font-bold">
-                    PROFILE
-                </span>
+                <Link
+                  to="/blog"
+                  className="text-[#b21e4b] hover:text-[#C71A31] font-bold"
+                >
+                  BLOGS
                 </Link>
               </li>
               <li>
@@ -125,12 +123,16 @@ function Navbar() {
                 </Link>
               </li>
               <li>
-                <button
-                  onClick={logout} 
-                  className="text-[#b21e4b] hover:text-[#C71A31] font-bold"
-                >
-                  LOGOUT
-                </button>
+                <Link to="/profile" className="flex items-center space-x-2">
+                  <img
+                    src="/photos/defaultprofile.JPG"
+                    alt="Profile"
+                    className="w-5 h-5 rounded-full"
+                  />
+                  <span className="text-[#b21e4b] hover:text-[#C71A31] font-bold">
+                    PROFILE
+                  </span>
+                </Link>
               </li>
             </>
           ) : (
@@ -140,7 +142,7 @@ function Navbar() {
                   to="/register"
                   className="text-[#b21e4b] hover:text-[#C71A31] font-bold"
                 >
-                  SIGN UP
+                  SIGN IN
                 </Link>
               </li>
               <li>
@@ -148,12 +150,24 @@ function Navbar() {
                   to="/login"
                   className="text-[#b21e4b] hover:text-[#C71A31] font-bold"
                 >
-                  LOGIN
+                  LOG IN
                 </Link>
               </li>
             </>
           )}
         </ul>
+
+        {/* Logout button on the right */}
+        {isAuthorized && (
+          <div className="flex-shrink-0">
+            <button
+              onClick={logout}
+              className="text-[#b21e4b] hover:text-[#C71A31] font-bold"
+            >
+              LOGOUT
+            </button>
+          </div>
+        )}
       </nav>
     </div>
   );

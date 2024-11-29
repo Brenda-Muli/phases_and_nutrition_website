@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 
-function ProfileEditForm({ userProfile, setUserProfile, ingredients, setIsEditing }) {
+function ProfileEditForm({ userProfile, setUserProfile, setIsEditing }) {
   const handleImageChange = (e) => {
     setUserProfile((prev) => ({
       ...prev,
@@ -9,33 +9,21 @@ function ProfileEditForm({ userProfile, setUserProfile, ingredients, setIsEditin
     }));
   };
 
-  const handleIngredientChange = (ingredientId) => {
-    const alreadySelected = userProfile.saved_ingredients.includes(ingredientId);
-    setUserProfile((prev) => ({
-      ...prev,
-      saved_ingredients: alreadySelected
-        ? prev.saved_ingredients.filter((id) => id !== ingredientId)
-        : [...prev.saved_ingredients, ingredientId],
-    }));
-  };
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
-    const jsonData = {
-      bio: userProfile.bio,
-      saved_ingredients: userProfile.saved_ingredients,
-    };
-    const formData = new FormData();
+  const formData = new FormData();
 
-    if (userProfile.profile_picture) {
-      formData.append("profile_picture", userProfile.profile_picture);
-    }
-    formData.append("jsonData", JSON.stringify(jsonData));
-    console.log("FormData being sent:", formData);
+  formData.append("bio", userProfile.bio);
 
+  if (userProfile.profile_picture) {
+    formData.append("profile_picture", userProfile.profile_picture);
+  }
+
+  console.log("FormData being sent:", formData);
     try {
       const response = await axios.patch(
-        "http://localhost:8000/api/phases/profile/update/",
+        "http://localhost:8000/api/phases/profile/",
         formData,
         {
           headers: {
@@ -48,7 +36,6 @@ function ProfileEditForm({ userProfile, setUserProfile, ingredients, setIsEditin
       setUserProfile({
         ...userProfile,
         bio: response.data.bio,
-        saved_ingredients: response.data.saved_ingredients, 
         profile_picture: response.data.profile_picture, 
       });
 
