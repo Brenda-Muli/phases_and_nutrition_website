@@ -29,8 +29,6 @@ class UserCreate(generics.CreateAPIView):
 
   def perform_create(self, serializer):
     user = serializer.save()
-    UserProfile.objects.create(user = user)
-
     return user
 
 class UserDetailView(generics.RetrieveUpdateAPIView):
@@ -43,8 +41,7 @@ class UserDetailView(generics.RetrieveUpdateAPIView):
       profile = self.request.user.profile
       return profile
     except UserProfile.DoesNotExist:
-       profile = UserProfile.objects.create(user = self.request.user)
-
+       profile = UserProfile.objects.get_or_create(user = self.request.user)
        return profile
   
 @csrf_exempt

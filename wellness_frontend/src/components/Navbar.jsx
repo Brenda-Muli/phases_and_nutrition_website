@@ -80,7 +80,7 @@ function Navbar() {
               <li className="relative">
                 <button
                   onClick={() => setSubmenuVisible(!submenuVisible)}
-                  className="text-[#b21e4b] hover:text-[#C71A31] font-bold"
+                  className="text-[#b21e4b] hover:text-[#C71A31] font-bold "
                 >
                   PHASES
                 </button>
@@ -91,7 +91,7 @@ function Navbar() {
                     exit="exit"
                     className="absolute left-0 w-48 mt-2 bg-white rounded-md shadow-lg"
                   >
-                    <div className="py-1">
+                    <div className="py-1 z-10">
                       {phases.map((phase) => (
                         <Link
                           key={phase.slug}

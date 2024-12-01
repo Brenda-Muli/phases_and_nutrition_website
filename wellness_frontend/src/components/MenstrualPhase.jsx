@@ -113,7 +113,7 @@ function MenstrualPhase() {
    
     }}
   >
-    <div className="absolute inset-0 bg-white bg-opacity-20 z-0 "></div>
+    <div className="absolute inset-0 bg-white bg-opacity-20 "></div>
     <h2 className="text-4xl font-bold pt-9 text-[#8d0e32] font-playfair text-center  relative z-10">
       Menstrual Phase
     </h2>
