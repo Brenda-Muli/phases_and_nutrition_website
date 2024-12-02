@@ -1,7 +1,11 @@
 import React from "react";
 import axios from "axios";
+import Alert from "./Alert"
 
 function ProfileEditForm({ userProfile, setUserProfile, setIsEditing }) {
+  const [alertMessage, setAlertMessage] = useState(""); 
+  const [showAlert, setShowAlert] = useState(false); 
+
   const handleImageChange = (e) => {
     setUserProfile((prev) => ({
       ...prev,
@@ -40,11 +44,16 @@ function ProfileEditForm({ userProfile, setUserProfile, setIsEditing }) {
       });
 
       setIsEditing(false); 
-      alert("Profile updated successfully!");
+      setAlertMessage("Profile updated successfully!");
+      setShowAlert(true);
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 3000);
 
     } catch (error) {
       console.error("Error updating profile:", error);
-      alert("Failed to update profile.");
+      setAlertMessage("Failed to update profile.");
+      setShowAlert(true);
     }
   };
 

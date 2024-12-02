@@ -89,9 +89,9 @@ function Navbar() {
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    className="absolute left-0 w-48 mt-2 bg-white rounded-md shadow-lg"
+                    className="absolute left-0 w-48 mt-2 bg-white rounded-md shadow-lg z-20"
                   >
-                    <div className="py-1 z-10">
+                    <div className="py-1 ">
                       {phases.map((phase) => (
                         <Link
                           key={phase.slug}
