@@ -19,7 +19,7 @@ function OvulatoryPhase() {
   useEffect(() => {
     const fetchPhaseDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/meal/phases/${slug}/`);
+        const response = await axios.get(`https://wellness-backend-fetu.onrender.com/api/meal/phases/${slug}/`);
         setPhase(response.data);
         setLoading(false);
       } catch (err) {
@@ -52,7 +52,7 @@ function OvulatoryPhase() {
     try {
       // Directly use the token in the request headers
       const response = await axios.post(
-        "http://localhost:8000/api/phases/profile/",
+        "https://wellness-backend-fetu.onrender.com/api/phases/profile/",
         { ingredient_id: ingredientId },
         { headers: { Authorization: `Bearer ${localStorage.getItem("access")}` } }
       );

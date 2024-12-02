@@ -10,7 +10,7 @@ const BlogPostCategory = ({ setPosts }) => {
 
   const handleCategoryClick = async (category) => {
     try {
-      const response = await axios.get('http://localhost:8000/api/blog/category/', {params: { category }});
+      const response = await axios.get('https://wellness-backend-fetu.onrender.com/api/blog/category/', {params: { category }});
       console.log("Selected Category Posts:", response.data); 
       setPosts(response.data);
     } catch (error) {

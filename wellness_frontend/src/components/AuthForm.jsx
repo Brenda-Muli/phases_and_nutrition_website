@@ -57,7 +57,7 @@ const AuthForm = ({ route, method }) => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = "http://localhost:8000/accounts/google/login/";
+    window.location.href = "https://wellness-backend-fetu.onrender.com/accounts/google/login/";
   };
 
   return (

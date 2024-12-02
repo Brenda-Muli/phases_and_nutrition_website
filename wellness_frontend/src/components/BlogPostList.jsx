@@ -18,7 +18,7 @@ function BlogPostList() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/blog/");
+        const response = await axios.get("https://wellness-backend-fetu.onrender.com/api/blog/");
         if (Array.isArray(response.data)) {
           setPosts(response.data);
         } else {

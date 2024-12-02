@@ -30,7 +30,7 @@ function ProfilePage() {
       }
 
       try {
-        const profileResponse = await axiosInstance.get("http://localhost:8000/api/phases/profile/", {
+        const profileResponse = await axiosInstance.get("https://wellness-backend-fetu.onrender.com/api/phases/profile/", {
           headers: { Authorization: `Bearer ${access}` }
         });
 

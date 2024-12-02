@@ -8,7 +8,7 @@ function BlogPostDetail() {
 
   useEffect(() => {
     const fetchPost = async () => {
-      const response = await axios.get( `http://localhost:8000/api/blog/${slug}/`);
+      const response = await axios.get( `https://wellness-backend-fetu.onrender.com/api/blog/${slug}/`);
       setPost(response.data);
     };
     fetchPost();
