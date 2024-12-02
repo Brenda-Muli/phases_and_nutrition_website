@@ -60,7 +60,7 @@ function Home() {
             transition={{ delay: 0.4, duration: 0.5 }}
           >
             <Link
-              to=""http://localhost:5173",/phases/menstrual/"
+              to=""https://wellness-frontend.onrender.com",/phases/menstrual/"
               className="flex flex-col items-center justify-center bg-transparent rounded-lg overflow-hidden "
             >
               <img
@@ -84,7 +84,7 @@ function Home() {
             transition={{ delay: 0.5, duration: 0.5 }}
           >
             <Link
-              to=""http://localhost:5173",/phases/follicular/"
+              to=""https://wellness-frontend.onrender.com",/phases/follicular/"
               className="flex flex-col items-center justify-center bg-transparent rounded-lg overflow-hidden "
             >
               <img
@@ -109,7 +109,7 @@ function Home() {
             transition={{ delay: 0.6, duration: 0.5 }}
           >
             <Link
-              to=""http://localhost:5173",/phases/ovulatory/"
+              to=""https://wellness-frontend.onrender.com",/phases/ovulatory/"
               className="flex flex-col items-center justify-center bg-transparent rounded-lg overflow-hidden "
             >
               <img
@@ -133,7 +133,7 @@ function Home() {
             transition={{ delay: 0.7, duration: 0.5 }}
           >
             <Link
-              to=""http://localhost:5173",/phases/luteal/"
+              to=""https://wellness-frontend.onrender.com",/phases/luteal/"
               className="flex flex-col items-center justify-center bg-transparent rounded-lg overflow-hidden last:border-r-0"
             >
               <img
