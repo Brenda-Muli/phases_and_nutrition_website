@@ -44,12 +44,12 @@ function App() {
 
 const ProtectedLogin = () => {
   const { isAuthorized } = useAuthentication();
-  return isAuthorized ? <Navigate to="/" /> : <AuthPage initialMethod="login" />;
+  return isAuthorized ? <Navigate to="/home" /> : <AuthPage initialMethod="login" />;
 };
 
 const ProtectedRegister = () => {
   const { isAuthorized } = useAuthentication();
-  return isAuthorized ? <Navigate to="/" /> : <AuthPage initialMethod="register" />;
+  return isAuthorized ? <Navigate to="/login" /> : <AuthPage initialMethod="register" />;
 };
 
 export default App;
