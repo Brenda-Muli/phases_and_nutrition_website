@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {ACCESS_TOKEN} from './token';
 
-const apiUrl = 'https://wellness-backend-fetu.onrender.com';
+const apiUrl = 'https://wellness-backend-fetu.onrender.com/';
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL : apiUrl,

@@ -18,7 +18,7 @@ function CalendarPage() {
     let config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: 'http://127.0.0.1:8000/api/calendar/current_phase/',
+      url: `https://wellness-backend-fetu.onrender.com/api/calendar/current_phase/`,
       headers: { 
         'Content-Type': 'application/json', 
         'Authorization': `Bearer ${localStorage.getItem("access")}`

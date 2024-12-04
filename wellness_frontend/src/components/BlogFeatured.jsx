@@ -11,7 +11,7 @@ function BlogFeatured() {
   useEffect(() => {
     const fetchFeaturedPost = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/api/blog/featured/");
+        const response = await axios.get(`https://wellness-backend-fetu.onrender.com/api/blog/featured/`);
         if (response.data.length > 0) {
           setFeaturedPost(response.data[0]);
         }
@@ -23,7 +23,7 @@ function BlogFeatured() {
     // Fetch other posts
     const fetchOtherPosts = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/api/blog/");
+        const response = await axios.get(`https://wellness-backend-fetu.onrender.com/api/blog/`);
         if (response.data.length > 0) {
           setOtherPosts(response.data.slice(0, 3));  
         }

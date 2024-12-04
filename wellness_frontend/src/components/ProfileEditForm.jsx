@@ -27,7 +27,7 @@ function ProfileEditForm({ userProfile, setUserProfile, setIsEditing }) {
   console.log("FormData being sent:", formData);
     try {
       const response = await axios.patch(
-        "https://wellness-backend-fetu.onrender.com/api/phases/profile/",
+        `https://wellness-backend-fetu.onrender.com/api/phases/profile/`,
         formData,
         {
           headers: {

@@ -53,7 +53,7 @@ function FollicularPhase() {
     try {
       // Directly use the token in the request headers
       const response = await axios.post(
-        "https://wellness-backend-fetu.onrender.com/api/phases/profile/",
+        `https://wellness-backend-fetu.onrender.com/api/phases/profile/`,
         { ingredient_id: ingredientId },
         { headers: { Authorization: `Bearer ${localStorage.getItem("access")}` } }
       );

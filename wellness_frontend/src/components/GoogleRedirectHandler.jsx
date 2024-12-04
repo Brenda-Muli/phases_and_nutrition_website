@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { GOOGLE_ACCESS_TOKEN} from "../token";
 
+
+
 function RedirectGoogleAuth () {
   const navigate = useNavigate ();
 
@@ -19,7 +21,7 @@ function RedirectGoogleAuth () {
 
       //verify the token from the backend
       axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
-      axios.get ('https://wellness-backend-fetu.onrender.com/api/auth/user/').then(response => {
+      axios.get ( `https://wellness-backend-fetu.onrender.com/api/auth/user/`).then(response => {
         console.log('User data:', response.data );
         navigate('/home');
       })
