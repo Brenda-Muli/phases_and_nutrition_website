@@ -17,11 +17,6 @@ import UserProfile from "./components/ProfilePage";
 import CycleCalendar from "./components/CycleCalendar";
 import MenstrualDataForm from "./components/MenstrualDataForm";
 
-// ProtectedRoute Component
-const ProtectedRoute = ({ element }) => {
-  const { isAuthorized } = useAuthentication(); 
-  return isAuthorized ? element : <Navigate to="/login" />; 
-};
 
 function App() {
   return (
@@ -31,37 +26,27 @@ function App() {
         <Route path="/login/callback" element={<RedirectGoogleAuth />} />
         <Route path="/login" element={<ProtectedLogin />} />
         <Route path="/register" element={<ProtectedRegister />} />
-        
-        {/* Protected routes */}
-        <Route path="/home" element={<ProtectedRoute element={<Home />} />} />
-        <Route path="/profile" element={<ProtectedRoute element={<UserProfile />} />} />
-        <Route path="/calendar" element={<ProtectedRoute element={<CycleCalendar />} />} />
-        <Route path="/calendarform" element={<ProtectedRoute element={<MenstrualDataForm />} />} />
-        
-        {/* Protected Blog and Phase Slug Routes */}
-        <Route path="/blog" element={<ProtectedRoute element={<BlogPostList />} />} />
-        <Route path="/blog/:slug" element={<ProtectedRoute element={<BlogPostDetail />} />} />
-        <Route path="/phases/:slug" element={<ProtectedRoute element={<PhaseDetail />} />} />
-        
-        {/* Public routes */}
+        <Route path="/home" element={<Home />} />
         <Route path="/" element={<Header />} />
+        <Route path="/phases/:slug" element={<PhaseDetail />} />
+        <Route path="/blog" element={<BlogPostList />} />
+        <Route path="/blog/:slug" element={<BlogPostDetail />} />
         <Route path="/featured" element={<BlogFeatured />} />
         <Route path="/blog/category" element={<BlogPostCategory />} />
-        
-        {/* Not Found Route */}
+        <Route path="/profile" element={<UserProfile />} />
+        <Route path="/calendar" element={<CycleCalendar />} />
+        <Route path="/calendarform" element={<MenstrualDataForm />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
 }
 
-// ProtectedLogin Component 
 const ProtectedLogin = () => {
   const { isAuthorized } = useAuthentication();
   return isAuthorized ? <Navigate to="/home" /> : <AuthPage initialMethod="login" />;
 };
 
-// ProtectedRegister Component 
 const ProtectedRegister = () => {
   const { isAuthorized } = useAuthentication();
   return isAuthorized ? <Navigate to="/login" /> : <AuthPage initialMethod="register" />;
