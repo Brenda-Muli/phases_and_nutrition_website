@@ -67,7 +67,7 @@ def google_login_callback(request):
   
   else:
     print('No Google token found for user', user)
-    return redirect (f'{os.getenv('FRONTEND_URL')}/login/callback/?error=NoGoogleToken')
+    return redirect (f"{os.getenv('FRONTEND_URL')}/login/callback/?error=NoGoogleToken")
 
 @csrf_exempt
 def validate_google_token(request):
