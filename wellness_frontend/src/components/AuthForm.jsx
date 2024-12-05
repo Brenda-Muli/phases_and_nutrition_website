@@ -64,7 +64,7 @@ const AuthForm = ({ route, method }) => {
     <div className="relative flex flex-col lg:flex-row h-screen overflow-hidden">
       {/* Circle background */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-[#fbd0d9] to-[#fef2f4] rounded-full z-0"
+        className="absolute inset-0 bg-gradient-to-r from-[#fbd0d9] to-[#fef2f4] rounded-full z-0 hidden lg:block"
         initial={{ left: isLogin ? "50%" : "-40%", top: "-50%", width: "600px", height: "600px" }}
         animate={{
           left: isLogin ? "60%" : "-20%",
@@ -87,9 +87,7 @@ const AuthForm = ({ route, method }) => {
         >
           {/* Authentication Form */}
           <div
-            className={`flex flex-col items-center justify-center w-full lg:w-1/2 p-4 lg:p-6 ${
-              isLogin ? "order-1" : "order-2"
-            }`}
+            className={`flex flex-col items-center justify-center w-full lg:w-1/2 p-4 lg:p-6 ${isLogin ? "order-1" : "order-2"}`}
           >
             {loading && (
               <div>
@@ -187,9 +185,7 @@ const AuthForm = ({ route, method }) => {
   
           {/* Image Section */}
           <motion.div
-            className={`hidden lg:flex items-center justify-center w-full lg:w-1/2 h-full ${
-              isLogin ? "order-2" : "order-1"
-            }`}
+            className={`hidden lg:flex items-center justify-center w-full lg:w-1/2 h-full ${isLogin ? "order-2" : "order-1"}`}
             initial={{ x: isLogin ? 100 : -100 }}
             animate={{ x: 0 }}
             transition={{ duration: 0.5 }}
