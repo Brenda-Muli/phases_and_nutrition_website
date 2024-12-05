@@ -61,46 +61,57 @@ const AuthForm = ({ route, method }) => {
   };
 
   return (
-    <div className="relative flex h-screen overflow-hidden">
+    <div className="relative flex flex-col lg:flex-row h-screen overflow-hidden">
       {/* Circle background */}
       <motion.div
         className="absolute inset-0 bg-gradient-to-r from-[#fbd0d9] to-[#fef2f4] rounded-full z-0"
-        initial={{ left: isLogin ? "50%" : "-40%", top: "-50%", width: "400px", height: "400px" }} 
+        initial={{ left: isLogin ? "50%" : "-40%", top: "-50%", width: "600px", height: "600px" }}
         animate={{
           left: isLogin ? "60%" : "-20%",
           top: "10%",
-          width: "600px", 
-          height: "600px",
+          width: "850px",
+          height: "800px",
         }}
         transition={{
-          duration: 1.5, 
+          duration: 1.5,
           ease: "easeInOut",
         }}
       />
   
-      <div className="flex items-center justify-center w-full h-full relative z-10 pt-16 px-4 sm:px-8">
+      <div className="flex items-center justify-center w-full h-full relative z-10 p-4">
         <motion.div
-          className="flex flex-col sm:flex-row items-center justify-center w-full sm:w-3/4 lg:w-1/2 rounded-lg shadow-lg bg-[rgba(255,182,193,0.3)] overflow-hidden"
+          className="flex flex-col lg:flex-row items-center justify-center w-full max-w-4xl rounded-lg shadow-lg bg-[rgba(255,182,193,0.3)] overflow-hidden"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
           {/* Authentication Form */}
-          <div className={`flex flex-col items-center justify-center w-full sm:w-1/2 p-6 ${isLogin ? "order-1" : "order-2"}`}>
+          <div
+            className={`flex flex-col items-center justify-center w-full lg:w-1/2 p-4 lg:p-6 ${
+              isLogin ? "order-1" : "order-2"
+            }`}
+          >
             {loading && (
               <div>
                 {error ? <span className="text-red-600">{error}</span> : <div></div>}
               </div>
             )}
             {!loading && (
-              <form onSubmit={handleSubmit}>
-                <h2 className="text-[#b31d3f] text-xl mb-4 font-bold">{isLogin ? "LOGIN" : "SIGN UP"}</h2>
+              <form onSubmit={handleSubmit} className="w-full">
+                <h2 className="text-[#b31d3f] text-xl mb-4 font-bold text-center">
+                  {isLogin ? "LOGIN" : "SIGN UP"}
+                </h2>
                 {error && <div className="text-red-600 mb-2">{error}</div>}
                 {success && <div className="text-green-600 mb-2">{success}</div>}
                 {!isLogin && (
                   <>
                     <div className="mb-4">
-                      <label htmlFor="email" className="text-sm font-bold text-[#8d0e32]">EMAIL:</label>
+                      <label
+                        htmlFor="email"
+                        className="text-sm font-bold text-[#8d0e32] block"
+                      >
+                        EMAIL:
+                      </label>
                       <input
                         type="email"
                         id="email"
@@ -114,7 +125,12 @@ const AuthForm = ({ route, method }) => {
                   </>
                 )}
                 <div className="mb-4">
-                  <label htmlFor="username" className="text-sm font-bold text-[#8d0e32]">USERNAME:</label>
+                  <label
+                    htmlFor="username"
+                    className="text-sm font-bold text-[#8d0e32] block"
+                  >
+                    USERNAME:
+                  </label>
                   <input
                     type="text"
                     id="username"
@@ -126,7 +142,12 @@ const AuthForm = ({ route, method }) => {
                   />
                 </div>
                 <div className="mb-4">
-                  <label htmlFor="password" className="text-sm font-bold text-[#8d0e32]">PASSWORD:</label>
+                  <label
+                    htmlFor="password"
+                    className="text-sm font-bold text-[#8d0e32] block"
+                  >
+                    PASSWORD:
+                  </label>
                   <input
                     type="password"
                     id="password"
@@ -137,7 +158,10 @@ const AuthForm = ({ route, method }) => {
                     className="w-full p-2 border border-[#8d0e32] rounded"
                   />
                 </div>
-                <button type="submit" className="bg-[#d5294d] text-white p-2 rounded mb-4 w-full hover:bg-red-700">
+                <button
+                  type="submit"
+                  className="bg-[#d5294d] text-white p-2 rounded mb-4 w-full hover:bg-red-700"
+                >
                   {isLogin ? "Login" : "Register"}
                 </button>
                 <button
@@ -163,12 +187,14 @@ const AuthForm = ({ route, method }) => {
   
           {/* Image Section */}
           <motion.div
-            className={`flex items-center justify-center w-full sm:w-1/3 md:w-2/3 h-full ${isLogin ? "order-2" : "order-1"}`}
+            className={`hidden lg:flex items-center justify-center w-full lg:w-1/2 h-full ${
+              isLogin ? "order-2" : "order-1"
+            }`}
             initial={{ x: isLogin ? 100 : -100 }}
             animate={{ x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <img src={pic} alt="Description" className="w-full h-auto sm:w-2/3 md:w-full" />
+            <img src={pic} alt="Description" className="w-3/4 max-w-md" />
           </motion.div>
         </motion.div>
       </div>
