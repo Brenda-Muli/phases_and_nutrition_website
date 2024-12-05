@@ -58,11 +58,14 @@ function ProfileEditForm({ userProfile, setUserProfile, setIsEditing }) {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    <div className="flex flex-col items-center justify-center min-h-screen p-4">
       {showAlert && (
         <Alert message={alertMessage} onClose={() => setShowAlert(false)} />
       )}
-      <form onSubmit={handleUpdateProfile} className="bg-[rgba(255,182,193,0.3)] p-6 rounded-lg shadow-lg w-full sm:w-96">
+      <form
+        onSubmit={handleUpdateProfile}
+        className="bg-[rgba(255,182,193,0.3)] p-6 rounded-lg shadow-lg w-full sm:w-96 sm:p-8"
+      >
         <div className="form-group mb-4">
           <label htmlFor="bio" className="block font-semibold text-[#8d0e32] mb-2">
             Update Bio
@@ -78,6 +81,7 @@ function ProfileEditForm({ userProfile, setUserProfile, setIsEditing }) {
             placeholder="Update your bio..."
           />
         </div>
+  
         <div className="form-group mb-4">
           <label htmlFor="profile_picture" className="block font-semibold text-[#8d0e32] mb-2">
             Profile Picture
@@ -90,6 +94,7 @@ function ProfileEditForm({ userProfile, setUserProfile, setIsEditing }) {
             className="w-full p-2 border border-[#8d0e32] rounded"
           />
         </div>
+  
         <button
           type="submit"
           className="px-6 py-2 bg-[#d5294d] text-white rounded w-full hover:bg-red-700"
@@ -99,6 +104,7 @@ function ProfileEditForm({ userProfile, setUserProfile, setIsEditing }) {
       </form>
     </div>
   );
+  
 }
 
 export default ProfileEditForm;

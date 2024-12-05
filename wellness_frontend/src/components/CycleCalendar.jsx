@@ -95,84 +95,61 @@ function CycleCalendar() {
   };
 
   return (
-  <div style={{
-    paddingTop: "2rem", 
-  }}>
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        backgroundColor: "#f9f9f9",
-        paddingTop: "6rem",
-        
-      }}
-    >
-      <div
-        style={{
-          backgroundColor: "#fff",
-          borderRadius: "10px",
-          boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
-          padding: "20px",
-          width: "80%",
-          maxWidth: "800px",
-        }}
-      >
-        <h2 style={{ textAlign: "center", color: "#8d0e32", marginBottom: "20px" }}>
-          Menstrual Cycle Calendar
-        </h2>
-        <div style={{ marginBottom: "20px", textAlign: "center" }}>
-        </div>
-        <div style={{ textAlign: "center", marginBottom: "20px" }}>
-          <button
-            onClick={() => setShowForm(true)}
-            style={{
-              padding: "10px 20px",
-              backgroundColor: "#8d0e32",
-              color: "#fff",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
-          >
-            Enter Your Details
-          </button>
-        </div>
-        {showForm && (
-          <div>
-            <MenstrualDataForm onSubmit={handleFormSubmit} />
+    <div className="pt-8 sm:pt-10 lg:pt-16">
+      <div className="flex justify-center items-center min-h-screen bg-gray-100 pt-24 sm:pt-16">
+        <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-3xl">
+          <h2 className="text-center text-[#8d0e32] text-2xl sm:text-3xl font-semibold mb-6">
+            Menstrual Cycle Calendar
+          </h2>
+  
+          <div className="text-center mb-6">
+            <button
+              onClick={() => setShowForm(true)}
+              className="py-2 px-6 bg-[#8d0e32] text-white border-none rounded-md cursor-pointer"
+            >
+              Enter Your Details
+            </button>
           </div>
-        )}
-        <Calendar
-          localizer={localizer}
-          events={events}
-          startAccessor="start"
-          endAccessor="end"
-          style={{
-            height: 350,
-            border: "1px solid #e0e0e0",
-            borderRadius: "8px",
-            padding: "10px",
-          }}
-          date={currentMonth}
-          onNavigate={handleNavigate}
-          eventPropGetter={(event) => ({
-            style: {
-              backgroundColor: getPhaseColor(event.title),
-              color: "#fff",
-              borderRadius: "4px",
-              border: "none",
-            },
-          })}
-        />
-        <div style={{ marginTop: "20px", textAlign: "center", fontSize: "18px", fontWeight: "bold" }} >
-          <p className = "text-[#8d0e32]" >You are currently at the {currentPhase} phase.</p>
+  
+          {showForm && (
+            <div>
+              <MenstrualDataForm onSubmit={handleFormSubmit} />
+            </div>
+          )}
+  
+          <div className="mt-6">
+            <Calendar
+              localizer={localizer}
+              events={events}
+              startAccessor="start"
+              endAccessor="end"
+              style={{
+                height: "350px",
+                border: "1px solid #e0e0e0",
+                borderRadius: "8px",
+                padding: "10px",
+              }}
+              date={currentMonth}
+              onNavigate={handleNavigate}
+              eventPropGetter={(event) => ({
+                style: {
+                  backgroundColor: getPhaseColor(event.title),
+                  color: "#fff",
+                  borderRadius: "4px",
+                  border: "none",
+                },
+              })}
+            />
+          </div>
+  
+          <div className="mt-6 text-center text-lg font-bold">
+            <p className="text-[#8d0e32]">You are currently at the {currentPhase} phase.</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   );
+  
 }
 
 export default CycleCalendar;

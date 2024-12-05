@@ -20,12 +20,12 @@ const BlogPostCategory = ({ setPosts }) => {
   };
 
   return (
-    <div className="flex mb-4 space-x-4 mt-7 justify-center text-center">
+    <div className="flex flex-wrap justify-center mt-7 mb-4 space-x-4 text-center">
       {categories.map((category) => (
         <button
           key={category}
           onClick={() => handleCategoryClick(category)}
-          className="text-[#c50b34] hover:text-pink-600 font-bold"
+          className="text-[#c50b34] hover:text-pink-600 font-bold mb-2 sm:mb-0"
           style={{ backgroundColor: 'transparent', border: 'none', cursor: 'pointer' }}
         >
           {category.replace('_', ' ').toUpperCase()}
