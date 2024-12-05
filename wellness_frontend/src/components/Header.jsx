@@ -35,60 +35,56 @@ function Header() {
   }, [bgImage]);
 
   return (
-    <div className="relative flex flex-col items-center h-screen overflow-hidden z-20">
-      {/* Background Image */}
+    <div className="relative flex h-screen overflow-hidden z-20">
       <motion.div
         className="absolute inset-0 w-full h-full bg-cover bg-center"
         style={{ backgroundImage: `url(${bgImage})` }}
-        animate={{ opacity: [0, 1] }}
+        animate={{ opacity: [0, 1] }} 
         transition={{ duration: 4, ease: "easeInOut" }}
       />
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black opacity-30 z-10"></div>
+      <div className="absolute inset-0 bg-black opacity-30 z-10"></div> 
   
       {/* Text Section */}
-      <div className="relative flex flex-col items-center justify-center p-4 lg:p-8 w-full text-center z-20">
+      <div className="relative flex flex-col items-center justify-center p-8 w-full text-center z-20">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 4, ease: "easeInOut" }}
-          className="flex flex-col lg:flex-row items-center mb-6 lg:mb-9"
+          transition={{ duration: 4, ease: "easeInOut" }} 
+          className="flex flex-col sm:flex-row sm:mb-9"
         >
           {['Wellness', <span key="in" style={{ color: textColor }}>in</span>, 'Phases'].map((word, index) => (
             <motion.span
-              key={index}
+              key={word}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.8 }}
-              className={`text-3xl sm:text-4xl lg:text-6xl font-bold font-playfair ${
-                index < 2 ? 'mr-2 lg:mr-4' : ''
-              } ${word === 'Wellness' || word === 'Phases' ? 'text-white' : ''}`}
+              className={`text-4xl font-bold font-playfair ${index < 2 ? 'mr-4' : ''} text-7xl ${word === 'Wellness' || word === 'Phases' ? 'text-white' : ''}`}
             >
               {word}
             </motion.span>
           ))}
         </motion.div>
   
-        {/* Fade-in description text */}
+        {/* Fade-in description text*/}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0 }}
           transition={{ delay: 3, duration: 3, ease: "easeInOut" }}
-          className="mt-4 text-lg sm:text-2xl lg:text-3xl font-prata text-white px-2 lg:px-0"
+          className="mt-4 text-3xl font-prata text-white"
         >
           Discover the journey of wellness through various menstrual phases.
         </motion.p>
   
         {/* Buttons */}
-        <div className="mt-6 flex flex-wrap items-center justify-center space-x-2 lg:space-x-4">
+        <div className="mt-6 space-x-4 flex justify-center">
           <Link to="/register">
             <motion.button
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 3.2 }}
-              className="text-white py-2 px-4 rounded-lg text-sm sm:text-base lg:text-lg"
+              className="text-white py-2 px-4 rounded-lg"
               style={{
                 backgroundColor: textColor,
               }}
@@ -101,7 +97,7 @@ function Header() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 3.2 }}
-              className="text-white py-2 px-4 rounded-lg text-sm sm:text-base lg:text-lg"
+              className="text-white py-2 px-4 rounded-lg"
               style={{
                 backgroundColor: textColor,
               }}
