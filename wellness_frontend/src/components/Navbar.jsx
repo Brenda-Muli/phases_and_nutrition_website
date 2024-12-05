@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useAuthentication } from "../auth"; 
+import { useAuthentication } from "../auth";
 
 function Navbar() {
   const [submenuVisible, setSubmenuVisible] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const navbarRef = useRef(null);
   const navigate = useNavigate();
-  
-  const { isAuthorized, logout } = useAuthentication(); 
 
-  const lastScrollY = useRef(0); 
+  const { isAuthorized, logout } = useAuthentication();
+
+  const lastScrollY = useRef(0);
 
   const phases = [
     { name: "Menstrual Phase", slug: "menstrual" },
@@ -27,7 +27,7 @@ function Navbar() {
       } else {
         setIsVisible(true);
       }
-      lastScrollY.current = window.scrollY; 
+      lastScrollY.current = window.scrollY;
     }
   };
 
@@ -52,7 +52,7 @@ function Navbar() {
     >
       <nav
         ref={navbarRef}
-        className="max-w-6xl mx-auto p-4 flex items-center justify-between "
+        className="max-w-6xl mx-auto p-4 flex items-center justify-between space-x-8 overflow-x-auto"
       >
         {/* Logo on the left */}
         <div className="flex-shrink-0">
@@ -66,7 +66,7 @@ function Navbar() {
         </div>
 
         {/* Centered navigation links */}
-        <ul className="flex space-x-8 flex-grow justify-center">
+        <ul className="flex items-center space-x-8 flex-grow justify-center">
           {isAuthorized ? (
             <>
               <li>
@@ -80,7 +80,7 @@ function Navbar() {
               <li className="relative">
                 <button
                   onClick={() => setSubmenuVisible(!submenuVisible)}
-                  className="text-[#b21e4b] hover:text-[#C71A31] font-bold "
+                  className="text-[#b21e4b] hover:text-[#C71A31] font-bold"
                 >
                   PHASES
                 </button>
@@ -91,7 +91,7 @@ function Navbar() {
                     exit="exit"
                     className="absolute left-0 w-48 mt-2 bg-white rounded-md shadow-lg z-20"
                   >
-                    <div className="py-1 ">
+                    <div className="py-1">
                       {phases.map((phase) => (
                         <Link
                           key={phase.slug}
