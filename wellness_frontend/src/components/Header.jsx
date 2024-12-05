@@ -59,7 +59,7 @@ function Header() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.8 }}
-              className={`sm:text-2xl md:text-3xl lg:text-4xl font-bold font-playfair ${index < 2 ? 'mr-4' : ''} text-5xl sm:text-5xl md:text-6xl ${word === 'Wellness' || word === 'Phases' ? 'text-white' : ''}`}
+              className={`text-4xl sm:text-2xl md:text-3xl lg:text-4xl font-bold font-playfair ${index < 2 ? 'mr-4' : ''} text-7xl sm:text-5xl md:text-6xl ${word === 'Wellness' || word === 'Phases' ? 'text-white' : ''}`}
             >
               {word}
             </motion.span>
