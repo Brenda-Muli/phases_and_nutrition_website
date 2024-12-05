@@ -7,6 +7,7 @@ function Navbar() {
   const [submenuVisible, setSubmenuVisible] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const navbarRef = useRef(null);
+  const [menuVisible, setMenuVisible] = useState(false); 
   const navigate = useNavigate();
   
   const { isAuthorized, logout } = useAuthentication(); 
