@@ -173,7 +173,7 @@ const AuthForm = ({ route, method }) => {
         </motion.div>
       </div>
     </div>
-  );  
+  );   
 };
 
 export default AuthForm;
