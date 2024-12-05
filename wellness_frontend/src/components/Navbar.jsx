@@ -58,7 +58,7 @@ function Navbar() {
             <img src="/photos/logo.png" alt="Logo" className="w-5 h-5 rounded-full" />
           </Link>
         </div>
-
+  
         {/* Mobile Menu Icon - Positioned to the right */}
         <div className="lg:hidden flex items-center ml-auto">
           <button
@@ -70,7 +70,7 @@ function Navbar() {
             </svg>
           </button>
         </div>
-
+  
         {/* Centered navigation links (for large screens) */}
         <ul className={`lg:flex space-x-8 flex-grow justify-center ${menuVisible ? 'flex' : 'hidden'} lg:flex flex-col lg:flex-row`}>
           {isAuthorized ? (
@@ -118,10 +118,10 @@ function Navbar() {
             </>
           )}
         </ul>
-
+  
         {/* Logout button on the right (only when authorized) */}
         {isAuthorized && (
-          <div className="flex-shrink-0">
+          <div className="lg:hidden flex flex-col items-end mt-4">
             <button onClick={logout} className="text-[#b21e4b] hover:text-[#C71A31] font-bold">
               LOGOUT
             </button>
@@ -129,7 +129,7 @@ function Navbar() {
         )}
       </nav>
     </div>
-  );
+  );  
 }
 
 export default Navbar;
