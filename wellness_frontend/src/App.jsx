@@ -66,7 +66,7 @@ const ProtectedRegister = () => {
   const { isAuthorized, loading } = useAuthentication();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>...</div>;
   }
 
   return isAuthorized ? <Navigate to="/home" replace /> : <AuthPage initialMethod="register" />;
