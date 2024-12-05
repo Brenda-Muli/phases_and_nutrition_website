@@ -65,19 +65,19 @@ const AuthForm = ({ route, method }) => {
       {/* Circle background */}
       <motion.div
         className="absolute inset-0 bg-gradient-to-r from-[#fbd0d9] to-[#fef2f4] rounded-full z-0"
-        initial={{ left: isLogin ? "50%" : "-40%", top: "-50%", width: "600px", height: "600px" }} 
+        initial={{ left: isLogin ? "50%" : "-40%", top: "-50%", width: "400px", height: "400px" }} 
         animate={{
           left: isLogin ? "60%" : "-20%",
           top: "10%",
-          width: "850px", 
-          height: "800px", 
+          width: "600px", 
+          height: "600px",
         }}
         transition={{
           duration: 1.5, 
           ease: "easeInOut",
         }}
       />
-  
+    
       <div className="flex items-center justify-center w-full h-full relative z-10 pt-16">
         <motion.div
           className="flex flex-col sm:flex-row items-center justify-center w-3/4 lg:w-1/2 rounded-lg shadow-lg bg-[rgba(255,182,193,0.3)] overflow-hidden"
@@ -160,20 +160,21 @@ const AuthForm = ({ route, method }) => {
               </form>
             )}
           </div>
-  
+    
           {/* Image Section */}
           <motion.div
-            className={`flex items-center justify-center w-full sm:w-1/2 h-full ${isLogin ? "order-2" : "order-1"}`}
+            className={`flex items-center justify-center w-full sm:w-3/4 md:w-2/3 h-full ${isLogin ? "order-2" : "order-1"}`}
             initial={{ x: isLogin ? 100 : -100 }}
             animate={{ x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <img src={pic} alt="Description" className="w-full" />
+            <img src={pic} alt="Description" className="w-full sm:w-3/4 md:w-2/3 lg:w-full" />
           </motion.div>
         </motion.div>
       </div>
     </div>
-  );  
+  );
+   
 };
 
 export default AuthForm;

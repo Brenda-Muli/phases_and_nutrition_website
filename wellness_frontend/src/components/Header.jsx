@@ -59,7 +59,7 @@ function Header() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.8 }}
-              className={`text-4xl font-bold font-playfair ${index < 2 ? 'mr-4' : ''} text-7xl ${word === 'Wellness' || word === 'Phases' ? 'text-white' : ''}`}
+              className={`sm:text-2xl md:text-3xl lg:text-4xl font-bold font-playfair ${index < 2 ? 'mr-4' : ''} text-5xl sm:text-5xl md:text-6xl ${word === 'Wellness' || word === 'Phases' ? 'text-white' : ''}`}
             >
               {word}
             </motion.span>
@@ -72,7 +72,7 @@ function Header() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0 }}
           transition={{ delay: 3, duration: 3, ease: "easeInOut" }}
-          className="mt-4 text-3xl font-prata text-white"
+          className="mt-4 sm:text-xl md:text-2xl lg:text-3xl font-prata text-white"
         >
           Discover the journey of wellness through various menstrual phases.
         </motion.p>
