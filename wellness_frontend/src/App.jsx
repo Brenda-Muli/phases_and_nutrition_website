@@ -43,9 +43,16 @@ function App() {
 }
 
 const ProtectedLogin = () => {
-  const { isAuthorized } = useAuthentication();
-  return isAuthorized ? <Navigate to="/home" /> : <AuthPage initialMethod="login" />;
+  const { isAuthorized, loading } = useAuthentication(); 
+
+  if (loading) {
+    
+    return <div></div>;
+  }
+
+  return isAuthorized ? <Navigate to="/home" replace /> : <AuthPage initialMethod="login" />;
 };
+
 
 const ProtectedRegister = () => {
   const { isAuthorized } = useAuthentication();
