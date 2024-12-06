@@ -54,7 +54,6 @@ function Navbar() {
         ref={navbarRef}
         className="max-w-6xl mx-auto p-4 flex items-center justify-between space-x-8 overflow-x-auto"
       >
-        {/* Logo on the left */}
         <div className="flex-shrink-0">
           <Link to="/home">
             <img 
@@ -65,15 +64,11 @@ function Navbar() {
           </Link>
         </div>
 
-        {/* Centered navigation links */}
         <ul className="flex items-center space-x-8 flex-grow justify-center">
           {isAuthorized ? (
             <>
               <li>
-                <Link
-                  to="/home"
-                  className="text-[#b21e4b] hover:text-[#C71A31] font-bold"
-                >
+                <Link to="/home" className="text-[#b21e4b] hover:text-[#C71A31] font-bold">
                   HOME
                 </Link>
               </li>
@@ -107,18 +102,12 @@ function Navbar() {
                 )}
               </li>
               <li>
-                <Link
-                  to="/blog"
-                  className="text-[#b21e4b] hover:text-[#C71A31] font-bold"
-                >
+                <Link to="/blog" className="text-[#b21e4b] hover:text-[#C71A31] font-bold">
                   BLOGS
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/calendar"
-                  className="text-[#b21e4b] hover:text-[#C71A31] font-bold"
-                >
+                <Link to="/calendar" className="text-[#b21e4b] hover:text-[#C71A31] font-bold">
                   CALENDAR
                 </Link>
               </li>
@@ -138,18 +127,12 @@ function Navbar() {
           ) : (
             <>
               <li>
-                <Link
-                  to="/register"
-                  className="text-[#b21e4b] hover:text-[#C71A31] font-bold"
-                >
+                <Link to="/register" className="text-[#b21e4b] hover:text-[#C71A31] font-bold">
                   SIGN IN
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/login"
-                  className="text-[#b21e4b] hover:text-[#C71A31] font-bold"
-                >
+                <Link to="/login" className="text-[#b21e4b] hover:text-[#C71A31] font-bold">
                   LOG IN
                 </Link>
               </li>
@@ -157,7 +140,6 @@ function Navbar() {
           )}
         </ul>
 
-        {/* Logout button on the right */}
         {isAuthorized && (
           <div className="flex-shrink-0">
             <button
