@@ -15,6 +15,7 @@ const AuthForm = ({ route, method }) => {
   const [success, setSuccess] = useState(null);
   const [isLogin, setIsLogin] = useState(method === "login");
   const navigate = useNavigate();
+  const { setIsAuthorized } = useAuthentication();
 
   useEffect(() => {
     setIsLogin(method === "login");
@@ -31,6 +32,7 @@ const AuthForm = ({ route, method }) => {
       if (isLogin) {
         localStorage.setItem(ACCESS_TOKEN, res.data.access);
         localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
+        setIsAuthorized(true);
         navigate("/home");
       } else {
         setSuccess("Registration successful. Please login.");
