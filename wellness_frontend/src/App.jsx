@@ -47,7 +47,7 @@ const ProtectedLogin = () => {
 
   if (loading) {
     
-    return <div></div>;
+    return <div>....</div>;
   }
 
   return isAuthorized ? <Navigate to="/home" replace /> : <AuthPage initialMethod="login" />;

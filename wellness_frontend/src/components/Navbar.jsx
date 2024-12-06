@@ -46,6 +46,9 @@ function Navbar() {
     };
   }, []);
 
+  useEffect(() => {
+  }, [isAuthorized]);
+  
   return (
     <div
       className={`fixed w-full bg-white z-10 transition-transform duration-300 ${isVisible ? "translate-y-0" : "-translate-y-full"}`}
