@@ -2,14 +2,15 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useAuthentication } from "../auth";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "../token"; 
 
 function Navbar() {
   const [submenuVisible, setSubmenuVisible] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+  const [isAuthorized, setIsAuthorized] = useState(false); 
   const navbarRef = useRef(null);
   const navigate = useNavigate();
-
-  const { isAuthorized, logout } = useAuthentication();
+  const { logout } = useAuthentication();
 
   const lastScrollY = useRef(0);
 
@@ -20,6 +21,7 @@ function Navbar() {
     { name: "Luteal Phase", slug: "luteal" },
   ];
 
+  // Handle scroll visibility of navbar
   const handleScroll = () => {
     if (typeof window !== "undefined") {
       if (window.scrollY > lastScrollY.current) {
@@ -31,29 +33,38 @@ function Navbar() {
     }
   };
 
+  // Handle click outside of navbar to close submenu
   const handleClickOutside = (event) => {
     if (navbarRef.current && !navbarRef.current.contains(event.target)) {
       setSubmenuVisible(false);
     }
   };
 
+  // Monitor changes to authentication state when component mounts
   useEffect(() => {
+    // This ensures that the navbar gets updated when the auth status changes
+    if (localStorage.getItem(ACCESS_TOKEN)) {
+      // Assume the user is authorized if access token is present
+      setIsAuthorized(true);
+    } else {
+      setIsAuthorized(false);
+    }
+
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("click", handleClickOutside);
+
+    // Cleanup event listeners on component unmount
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("click", handleClickOutside);
     };
-  }, []);
+  }, []); // Empty dependency array ensures this runs once when the component mounts
 
   return (
     <div
       className={`fixed w-full bg-white z-10 transition-transform duration-300 ${isVisible ? "translate-y-0" : "-translate-y-full"}`}
     >
-      <nav
-        ref={navbarRef}
-        className="max-w-6xl mx-auto p-4 flex items-center justify-between space-x-8 overflow-x-auto"
-      >
+      <nav ref={navbarRef} className="max-w-6xl mx-auto p-4 flex items-center justify-between space-x-8 overflow-x-auto">
         {/* Logo on the left */}
         <div className="flex-shrink-0">
           <Link to="/home">
@@ -70,10 +81,7 @@ function Navbar() {
           {isAuthorized ? (
             <>
               <li>
-                <Link
-                  to="/home"
-                  className="text-[#b21e4b] hover:text-[#C71A31] font-bold"
-                >
+                <Link to="/home" className="text-[#b21e4b] hover:text-[#C71A31] font-bold">
                   HOME
                 </Link>
               </li>
@@ -107,18 +115,12 @@ function Navbar() {
                 )}
               </li>
               <li>
-                <Link
-                  to="/blog"
-                  className="text-[#b21e4b] hover:text-[#C71A31] font-bold"
-                >
+                <Link to="/blog" className="text-[#b21e4b] hover:text-[#C71A31] font-bold">
                   BLOGS
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/calendar"
-                  className="text-[#b21e4b] hover:text-[#C71A31] font-bold"
-                >
+                <Link to="/calendar" className="text-[#b21e4b] hover:text-[#C71A31] font-bold">
                   CALENDAR
                 </Link>
               </li>
@@ -138,18 +140,12 @@ function Navbar() {
           ) : (
             <>
               <li>
-                <Link
-                  to="/register"
-                  className="text-[#b21e4b] hover:text-[#C71A31] font-bold"
-                >
+                <Link to="/register" className="text-[#b21e4b] hover:text-[#C71A31] font-bold">
                   SIGN IN
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/login"
-                  className="text-[#b21e4b] hover:text-[#C71A31] font-bold"
-                >
+                <Link to="/login" className="text-[#b21e4b] hover:text-[#C71A31] font-bold">
                   LOG IN
                 </Link>
               </li>

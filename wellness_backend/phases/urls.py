@@ -7,7 +7,6 @@ urlpatterns = [
   path('userdetail/', views.UserDetailView.as_view(), name = 'user-detail'),
   path('profile/', views.UserProfileDetailView.as_view(), name='user-profile-detail'),
   path('accounts/google/login/', OAuth2LoginView.as_view(), name='google_login'),
-
   path('accounts/login/', OAuth2LoginView.as_view(), name='account_login'),
   path('accounts/signup/', OAuth2LoginView.as_view(), name='account_signup'),  
 ]
