@@ -5,6 +5,7 @@ import { ACCESS_TOKEN, REFRESH_TOKEN } from "../token";
 import google from "../assets/google.png";
 import pic from "../assets/pic.png";
 import { motion } from "framer-motion";
+import { useAuthentication } from "../auth";
 
 const AuthForm = ({ route, method }) => {
   const [username, setUsername] = useState("");
