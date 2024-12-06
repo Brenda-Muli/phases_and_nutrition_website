@@ -11,7 +11,7 @@ api.interceptors.request.use(
   (config) => {
     const accessToken = localStorage.getItem(ACCESS_TOKEN);
     if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
+      config.headers.Authorization = `Bearer ${ACCESS_TOKEN}`;
     }
 
     const googleAccessToken = localStorage.getItem ('GOOGLE_ACCESS_TOKEN');
