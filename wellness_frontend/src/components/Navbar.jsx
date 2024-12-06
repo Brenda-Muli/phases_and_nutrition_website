@@ -1,16 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useAuthentication } from "../auth";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "../token"; 
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "../token"; // Import your token constants
 
 function Navbar() {
   const [submenuVisible, setSubmenuVisible] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  const [isAuthorized, setIsAuthorized] = useState(false); 
+  const [isAuthorized, setIsAuthorized] = useState(false); // Local state to track authorization
   const navbarRef = useRef(null);
   const navigate = useNavigate();
-  const { logout } = useAuthentication();
 
   const lastScrollY = useRef(0);
 
@@ -42,19 +40,25 @@ function Navbar() {
 
   // Monitor changes to authentication state when component mounts
   useEffect(() => {
-    // This ensures that the navbar gets updated when the auth status changes
-    if (localStorage.getItem(ACCESS_TOKEN)) {
-      // Assume the user is authorized if access token is present
-      setIsAuthorized(true);
-    } else {
-      setIsAuthorized(false);
-    }
+    const checkAuthStatus = () => {
+      if (localStorage.getItem(ACCESS_TOKEN)) {
+        setIsAuthorized(true);
+      } else {
+        setIsAuthorized(false);
+      }
+    };
+
+    checkAuthStatus(); // Check auth status when component mounts
+
+    // Listen for changes to localStorage
+    window.addEventListener('storage', checkAuthStatus);
 
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("click", handleClickOutside);
 
     // Cleanup event listeners on component unmount
     return () => {
+      window.removeEventListener("storage", checkAuthStatus);
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("click", handleClickOutside);
     };
